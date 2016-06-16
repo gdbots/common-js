@@ -1,5 +1,5 @@
 {
-  "name": "gdbots-common",
+  "name": "@gdbots/common",
   "version": "0.1.0",
   "description": "Common classes and utils for js projects",
   "license": "Apache-2.0",
