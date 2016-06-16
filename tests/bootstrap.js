@@ -1,11 +1,15 @@
 'use strict';
 
-require('babel-register');
+// disable babel cache.
+process.env.BABEL_DISABLE_CACHE = 1;
+
+require('babel-register')({
+  plugins: [
+    ['module-alias', [
+      { src: './src', expose: 'gdbots' }
+    ]]
+  ]
+});
 
 require('chai').should();
 global.expect = require('chai');
-
-global.sourceRoot = require('path').join(__dirname, '../src/');
-process.env.NODE_PATH = global.sourceRoot;
-
-require('module').Module._initPaths();
