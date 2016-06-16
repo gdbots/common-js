@@ -2,6 +2,6 @@
   "name": "gdbots-common",
   "version": "0.1.0",
   "description": "Common classes and utils for js projects",
-  "main": "dist/common.min.js"
+  "main": "dist/common.min.js",
   "license": "Apache-2.0"
 }
