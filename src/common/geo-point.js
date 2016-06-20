@@ -9,7 +9,7 @@ import SystemUtils from 'gdbots/common/util/system-utils';
  *
  * @link http://geojson.org/geojson-spec.html#point
  */
-export default class GeoPoint extends SystemUtils.mixin(FromArray, ToArray)
+export default class GeoPoint extends SystemUtils.mixinClass(FromArray, ToArray)
 {
   /**
    * @param float lat

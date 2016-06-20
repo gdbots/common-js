@@ -25,21 +25,80 @@ export default class SystemUtils
   }
 
   /**
-   * Extends given class by object with functions or properties.
+   * Mixin traits into a class.
    *
-   * @param mixed Parent
+   * ex: class Foo extends mixinClass(Trait1) {}
    *
-   * @return return new MixedClass extended by Mixins
+   * @return mixed
    */
-  static mixin(Parent /*, ...mixins*/) {
-    // use slice as node 4 does not support param spread.
-    let mixins = Array.prototype.slice.call(arguments, 1);
-    class Mixed extends Parent {}
-    for (let mixin of mixins) {
-      for (let prop in mixin) {
-        Mixed.prototype[prop] = mixin[prop];
+  static mixinClass(...traits) {
+    class traitedClass
+    {
+      /**
+       * Checks to see if a class or trait has a trait
+       *
+       * @param string trait
+       *
+       * @return bool
+       */
+      static hasTrait(trait) {
+        let _traits;
+        if ('function' === typeof this) {
+          _traits = this.prototype._traits;
+        } else {
+          _traits = this._traits;
+        }
+        return 'object' === typeof _traits && Object.keys(_traits).indexOf(trait) >= 0;
       }
-    }
-    return Mixed;
+    };
+
+    mixin.apply(this, [traitedClass.prototype].concat(traits));
+
+    return traitedClass;
   }
 }
+
+/**
+ * Mixin traits into an Object (another trait)
+ */
+function mixin(object, ...traits) {
+  let _traits = {};
+
+  if (object._traits) {
+    Object.assign(_traits, object._traits);
+  }
+
+  let props = {
+    _traits: {
+      value: _traits,
+      writable: true,
+      configurable: true
+    }
+  };
+
+  for (let trait of traits) {
+    if ('function' !== typeof trait) {
+      continue;
+    }
+
+    if (trait.prototype._traits) {
+      Object.assign(_traits, trait.prototype._traits);
+    }
+
+    for (let name of Object.getOwnPropertyNames(trait)) {
+      if ('_traits' !== name && !object.hasOwnProperty(name)) {
+        props[name] = {
+          value: trait[name],
+          writable: true,
+          configurable: true
+        };
+      }
+    }
+
+    _traits[trait.name] = trait;
+  }
+
+  Object.defineProperties(object, props);
+
+  return object;
+};
