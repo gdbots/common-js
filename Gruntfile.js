@@ -73,6 +73,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
 
   grunt.registerTask('deploy', ['babel', 'concat', 'uglify', 'shell:cleanup']);
-  grunt.registerTask('default', ['babel', 'concat', 'shell:cleanup', 'watch']);
+  grunt.registerTask('default', ['watch']);
   grunt.registerTask('test', ['mochaTest']);
 };
