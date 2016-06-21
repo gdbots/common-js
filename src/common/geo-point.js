@@ -9,7 +9,7 @@ import SystemUtils from 'gdbots/common/util/system-utils';
  *
  * @link http://geojson.org/geojson-spec.html#point
  */
-export default class GeoPoint extends SystemUtils.mixinClass(FromArray, ToArray)
+export default class GeoPoint extends SystemUtils.mixinClass(null, FromArray, ToArray)
 {
   /**
    * @param float lat
@@ -54,7 +54,7 @@ export default class GeoPoint extends SystemUtils.mixinClass(FromArray, ToArray)
    */
   static fromArray(data = {}) {
     if (undefined !== data.coordinates) {
-      return new GeoPoint(data.coordinates[1], data.coordinates[0]);
+      return new this(data.coordinates[1], data.coordinates[0]);
     }
 
     throw new Error('Payload must be a GeoJson "Point" type.');
@@ -77,7 +77,7 @@ export default class GeoPoint extends SystemUtils.mixinClass(FromArray, ToArray)
   static fromString(string) {
     string = string.split(',');
 
-    return new GeoPoint(string[0], string[1]);
+    return new this(string[0], string[1]);
   }
 
   /**

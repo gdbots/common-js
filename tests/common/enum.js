@@ -13,8 +13,8 @@ describe('enum-test', function() {
       VALUE: 'value'
     });
 
+    expect(Enum1.VALUE).to.be.eq(Enum1.enumValueOf('VALUE'));
     expect(Enum1.VALUE.getValue()).to.be.eq('value');
-    expect(Enum1.enumValueOf('VALUE').getValue()).to.be.eq('value');
 
     done();
   });

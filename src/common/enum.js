@@ -52,16 +52,15 @@ export default class Enum {
 
   static _enumValuesFromArray(arr) {
     for (let key of arr) {
-      this._pushEnumValue(new Enum(), key);
+      this._pushEnumValue(new this(), key);
     }
   }
 
   static _enumValuesFromObject(obj) {
     for (let key of Object.keys(obj)) {
-      if (typeof obj[key] === 'string' || typeof obj[key] === 'number') {
-        obj[key] = { value: obj[key] };
-      }
-      let value = new Enum(obj[key]);
+      let value = new this({
+        value: obj[key]
+      });
       this._pushEnumValue(value, key);
     }
   }

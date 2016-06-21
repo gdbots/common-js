@@ -20,7 +20,7 @@ describe('system-utils-test', function() {
     expect(Foo.hasTrait('Trait1')).to.be.true;
     expect(Foo.hasTrait('Trait2')).to.be.false;
 
-    class Foo2 extends Foo {}
+    class Foo2 extends SystemUtils.mixinClass(Foo) {}
 
     expect(Foo2.hasTrait('Trait1')).to.be.true;
     expect(Foo2.hasTrait('Trait2')).to.be.false;

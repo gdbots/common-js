@@ -31,8 +31,12 @@ export default class SystemUtils
    *
    * @return mixed
    */
-  static mixinClass(...traits) {
-    class traitedClass
+  static mixinClass(Base, ...traits) {
+    if (!Base) {
+      Base = class NoBase {};
+    }
+
+    class traitedClass extends Base
     {
       /**
        * Checks to see if a class or trait has a trait
@@ -42,13 +46,40 @@ export default class SystemUtils
        * @return bool
        */
       static hasTrait(trait) {
-        let _traits = this._traits;
-
-        return 'object' === typeof _traits && Object.keys(_traits).indexOf(trait) >= 0;
+        return 'object' === typeof this._traits && this._traits.indexOf(trait) >= 0;
       }
     };
 
-    mixin.apply(this, [traitedClass].concat(traits));
+    // hold list of trait names
+    let _traits = [Base.name];
+
+    // add Base name
+    if ('object' === typeof Base._traits) {
+      _traits = _traits.concat(Base._traits);
+    }
+
+    let subClass = traitedClass;
+    for (let superClass of traits) {
+      // add trait names
+      if ('object' === typeof superClass._traits) {
+        _traits = _traits.concat(superClass._traits);
+      }
+      _traits = _traits.concat([superClass.name]);
+
+      // merge traits
+      mixin(subClass, superClass);
+
+      // point to next trait
+      subClass = superClass;
+    }
+
+    // add list of traits to main class
+    Object.defineProperty(traitedClass, '_traits', {
+      value: _traits,
+      configurable: false,
+      writable: false,
+      enumerable: true,
+    });
 
     return traitedClass;
   }
@@ -57,56 +88,29 @@ export default class SystemUtils
 /**
  * Mixin traits into an Object (another trait)
  */
-function mixin(object, ...traits) {
-  let _traits = {};
-
-  if (object._traits) {
-    Object.assign(_traits, object._traits);
+function mixin(subClass, superClass) {
+  if (typeof superClass !== 'function' && superClass !== null) {
+    throw new TypeError('Super expression must either be null or a function, not ' + (
+      typeof superClass === 'undefined' ? 'undefined' : (typeof superClass)
+    ));
   }
 
-  let prototypeProps = {};
-  let props = {
-    _traits: {
-      value: _traits,
-      writable: true,
-      configurable: true
-    }
-  };
-
-  for (let trait of traits) {
-    if ('function' !== typeof trait) {
-      continue;
-    }
-
-    if (trait._traits) {
-      Object.assign(_traits, trait._traits);
-    }
-
-    for (let name of Object.getOwnPropertyNames(trait.prototype)) {
-      if ('_traits' !== name && !object.hasOwnProperty(name)) {
-        prototypeProps[name] = {
-          value: trait[name],
-          writable: true,
-          configurable: true
-        };
+  subClass.prototype = Object.create(
+    superClass && superClass.prototype,
+    {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
       }
     }
+  );
 
-    for (let name of Object.getOwnPropertyNames(trait)) {
-      if ('_traits' !== name && !object.hasOwnProperty(name)) {
-        props[name] = {
-          value: trait[name],
-          writable: true,
-          configurable: true
-        };
-      }
-    }
-
-    _traits[trait.name] = trait;
+  if (superClass) {
+    Object.setPrototypeOf
+      ? Object.setPrototypeOf(subClass, superClass)
+      : subClass.__proto__ = superClass.__proto__  // eslint-disable-line no-proto
+    ;
   }
-
-  Object.defineProperties(object, props);
-  Object.defineProperties(object.prototype, prototypeProps);
-
-  return object;
-};
+}
