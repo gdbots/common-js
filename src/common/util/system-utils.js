@@ -42,17 +42,13 @@ export default class SystemUtils
        * @return bool
        */
       static hasTrait(trait) {
-        let _traits;
-        if ('function' === typeof this) {
-          _traits = this.prototype._traits;
-        } else {
-          _traits = this._traits;
-        }
+        let _traits = this._traits;
+
         return 'object' === typeof _traits && Object.keys(_traits).indexOf(trait) >= 0;
       }
     };
 
-    mixin.apply(this, [traitedClass.prototype].concat(traits));
+    mixin.apply(this, [traitedClass].concat(traits));
 
     return traitedClass;
   }
@@ -68,6 +64,7 @@ function mixin(object, ...traits) {
     Object.assign(_traits, object._traits);
   }
 
+  let prototypeProps = {};
   let props = {
     _traits: {
       value: _traits,
@@ -81,8 +78,18 @@ function mixin(object, ...traits) {
       continue;
     }
 
-    if (trait.prototype._traits) {
-      Object.assign(_traits, trait.prototype._traits);
+    if (trait._traits) {
+      Object.assign(_traits, trait._traits);
+    }
+
+    for (let name of Object.getOwnPropertyNames(trait.prototype)) {
+      if ('_traits' !== name && !object.hasOwnProperty(name)) {
+        prototypeProps[name] = {
+          value: trait[name],
+          writable: true,
+          configurable: true
+        };
+      }
     }
 
     for (let name of Object.getOwnPropertyNames(trait)) {
@@ -99,6 +106,7 @@ function mixin(object, ...traits) {
   }
 
   Object.defineProperties(object, props);
+  Object.defineProperties(object.prototype, prototypeProps);
 
   return object;
 };

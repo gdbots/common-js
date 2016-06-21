@@ -4,7 +4,7 @@ import {expect} from 'chai'
 import SystemUtils from 'gdbots/common/util/system-utils';
 
 describe('system-utils-test', function() {
-  it('should mixin traits into an object (another trait)', function(done) {
+  it('mixin traits into an object (another trait)', function(done) {
 
     class Trait1 {
       method1() {}
