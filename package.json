@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Common classes and utils for js projects",
   "license": "Apache-2.0",
+  "dependencies": {
+    "uuid": "~2.0"
+  },
   "devDependencies": {
     "chai": "~3.5",
     "grunt": "~0.4",

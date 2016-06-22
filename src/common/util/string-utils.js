@@ -1,5 +1,7 @@
 'use strict';
 
+import SystemUtils from 'gdbots/common/util/system-utils';
+
 // test whether a string is camel-case
 const HAS_SPACE = /\s/
 const HAS_SEPARATOR = /[\W_]/
@@ -13,6 +15,40 @@ const CAMEL_SPITTER = /(.)([A-Z]+)/g
 
 export default class StringUtils
 {
+  /**
+   * @param mixed obj
+   *
+   * @return string
+   */
+  static varToString(obj) {
+    if (Array.isArray(obj)) {
+      let a = [];
+      obj.forEach(function(v, k) {
+        a.push(k + ' => ' + this.varToString(v));
+      }.bind(this));
+
+      return 'Array(' + a.join(', ') + ')';
+    }
+
+    if ('object' === typeof obj) {
+      return 'Object(' + SystemUtils.getClass(obj) + ')';
+    }
+
+    if (null === obj) {
+        return 'null';
+    }
+
+    if (false === obj) {
+        return 'false';
+    }
+
+    if (true === obj) {
+        return 'true';
+    }
+
+    return '' + obj;
+  }
+
   /**
    * Remove any starting case from a 'string', like camel or snake, but keep
    * spaces and punctuation that may be important otherwise.
