@@ -6,7 +6,6 @@ import Enum from 'gdbots/common/enum';
 
 describe('enum-test', function() {
   it('validate enum values', function(done) {
-
     class Enum1 extends SystemUtils.mixinClass(Enum) {};
 
     Enum1.initEnum({
