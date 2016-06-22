@@ -104,7 +104,9 @@ export default class SystemUtils
     }
 
     // add list of traits to main class
-    BaseClass.prototype._traits = _traits;
+    BaseClass.prototype._traits = _traits.filter(function(element, pos, array) {
+      return array.indexOf(element) == pos;
+    });
 
     /**
      * Checks to see if a class or trait has a trait
@@ -114,8 +116,19 @@ export default class SystemUtils
      * @return bool
      */
     BaseClass.prototype.hasTrait = function(trait) {
-      return 'object' === typeof this._traits && this._traits.indexOf(trait) >= 0;
+      return Array.isArray(this._traits) && this._traits.indexOf(trait) >= 0;
     };
+
+    /**
+     * @param string trait
+     *
+     * @return bool
+     *
+     * @static
+     */
+    BaseClass.hasTrait = function(trait) {
+      return this.prototype.hasTrait(trait);
+    }
 
     return BaseClass;
   }
