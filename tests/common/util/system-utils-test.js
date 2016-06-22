@@ -4,6 +4,19 @@ import {expect} from 'chai'
 import SystemUtils from 'gdbots/common/util/system-utils';
 
 describe('system-utils-test', function() {
+  it('validate class name', function(done) {
+    class Test {
+      method1() {}
+    }
+
+    expect('Test' === SystemUtils.getClass(new Test())).to.be.true;
+    expect('MyClass' === SystemUtils.getClass(new (function MyClass() {}))).to.be.true;
+    expect(false === SystemUtils.getClass(function MyFunction() {})).to.be.true;
+    expect('Object' === SystemUtils.getClass({})).to.be.true;
+
+    done();
+  });
+
   it('mixin traits into an object (another trait)', function(done) {
     class Trait1 {
       method1() {}

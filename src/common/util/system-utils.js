@@ -37,16 +37,13 @@ export default class SystemUtils
    * example 4: get_class(42);
    * returns 4: false
    *
-   * example 5: get_class(window);
+   * example 5: get_class(function MyFunction() {});
    * returns 5: false
-   *
-   * example 6: get_class(function MyFunction() {});
-   * returns 6: false
    */
-  getClass(obj) {
+  static getClass(obj) {
     if (obj && typeof obj === 'object' &&
 			Object.prototype.toString.call(obj) !== '[object Array]' &&
-			obj.constructor && obj !== this.window) {
+			obj.constructor) {
         var arr = obj.constructor.toString().match(/function\s*(\w+)/);
 
         if (arr && arr.length === 2) {
