@@ -1,6 +1,8 @@
 'use strict';
 
-export default class BigNumber
+import BaseBigNumber from 'bignumber.js';
+
+export default class BigNumber extends BaseBigNumber
 {
-  // @todo: see https://github.com/moontoast/math/blob/master/src/Moontoast/Math/BigNumber.php
+  // @see https://www.npmjs.com/package/bignumber.js
 }

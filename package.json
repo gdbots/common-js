@@ -4,6 +4,7 @@
   "description": "Common classes and utils for js projects",
   "license": "Apache-2.0",
   "dependencies": {
+    "bignumber.js": "~2.3",
     "uuid": "~2.0"
   },
   "devDependencies": {
