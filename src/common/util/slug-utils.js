@@ -1,5 +1,7 @@
 'use strict';
 
+import StringUtils from 'gdbots/common/util/string-utils.js';
+
 const VALID_SLUG_PATTERN = /^[a-z0-9-]+/;
 const VALID_DATED_SLUG_PATTERN = /^([a-z0-9-]|[a-z0-9-][a-z0-9-\/]*[a-z0-9-])/;
 
@@ -36,7 +38,7 @@ export default class SlugUtils
    * @return string
    */
   static addDate(slug, date) {
-    return date.getFullYear() + '/' + ('00' + date.getMonth()).slice(-2) + '/' + ('00' + date.getDate()).slice(-2) + '/' + this.removeDate(slug);
+    return date.getFullYear() + '/' + StringUtils.strPad(date.getMonth(), 2, '0') + '/' + StringUtils.strPad(date.getDate(), 2, '0') + '/' + this.removeDate(slug);
   }
 
   /**

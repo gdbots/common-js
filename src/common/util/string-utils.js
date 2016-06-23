@@ -46,7 +46,7 @@ export default class StringUtils
         return 'true';
     }
 
-    return '' + obj;
+    return String(obj);
   }
 
   /**
@@ -145,6 +145,57 @@ export default class StringUtils
   }
 
   /**
+   * Pad a string to a certain length with another string.
+   *
+   * @link http://php.net/manual/en/function.str-pad.php
+   *
+   * example 1: str_pad('Kevin van Zonneveld', 30, '-=', 'STR_PAD_LEFT')
+   * returns 1: '-=-=-=-=-=-Kevin van Zonneveld'
+   *
+   * example 2: str_pad('Kevin van Zonneveld', 30, '-', 'STR_PAD_BOTH')
+   * returns 2: '------Kevin van Zonneveld-----'
+   */
+  static strPad(input, padLength, padString, padType) {
+    let half = '';
+    let padToGo;
+
+    let _strPadRepeater = function(s, len) {
+      let collect = '';
+
+      while (collect.length < len) {
+        collect += s;
+      }
+      collect = collect.substr(0, len);
+
+      return collect;
+    };
+
+    input += '';
+    padString = padString !== undefined ? padString : ' ';
+
+    if (padType !== 'STR_PAD_LEFT' && padType !== 'STR_PAD_RIGHT' && padType !== 'STR_PAD_BOTH') {
+      padType = 'STR_PAD_RIGHT';
+    }
+    if ((padToGo = padLength - input.length) > 0) {
+      if (padType === 'STR_PAD_LEFT') {
+        input = _strPadRepeater(padString, padToGo) + input;
+      } else if (padType === 'STR_PAD_RIGHT') {
+        input = input + _strPadRepeater(padString, padToGo);
+      } else if (padType === 'STR_PAD_BOTH') {
+        half = _strPadRepeater(padString, Math.ceil(padToGo / 2));
+        input = half + input + half;
+        input = input.substr(0, padLength);
+      }
+    }
+
+    return input;
+  }
+
+  /**
+   * Calculate the md5 hash of a string.
+   *
+   * @link http://php.net/manual/en/function.md5.php
+   *
    * Note: Keep in mind that in accordance with PHP, the whole string is buffered and then
    *   hashed. If available, we'd recommend using Node's native crypto modules directly
    *   in a steaming fashion for faster and more efficient hashing.

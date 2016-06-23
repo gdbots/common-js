@@ -19,7 +19,7 @@ export default class StringIdentifier extends SystemUtils.mixinClass(Identifier)
     }
 
     /** @var string */
-    this.string = string.trim();
+    this.string = String(string).trim();
 
     if (!this.string || this.string.length === 0) {
       throw new Error('String cannot be empty.');

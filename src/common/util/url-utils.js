@@ -3,10 +3,16 @@
 export default class UrlUtils
 {
   /**
+   * Encodes data with MIME base64.
+   *
+   * @link http://php.net/manual/en/function.base64-encode.php
+   *
    * example 1: base64_encode('Kevin van Zonneveld')
    * returns 1: 'S2V2aW4gdmFuIFpvbm5ldmVsZA=='
+   *
    * example 2: base64_encode('a')
    * returns 2: 'YQ=='
+   *
    * example 3: base64_encode('✓ à la mode')
    * returns 3: '4pyTIMOgIGxhIG1vZGU='
    */
@@ -64,10 +70,16 @@ export default class UrlUtils
   }
 
   /**
+   * Decodes data encoded with MIME base64.
+   *
+   * @link http://php.net/manual/en/function.base64-decode.php
+   *
    * example 1: base64_decode('S2V2aW4gdmFuIFpvbm5ldmVsZA==')
    * returns 1: 'Kevin van Zonneveld'
+   *
    * example 2: base64_decode('YQ==')
    * returns 2: 'a'
+   *
    * example 3: base64_decode('4pyTIMOgIGxhIG1vZGU=')
    * returns 3: '✓ à la mode'
    */
