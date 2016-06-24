@@ -5,6 +5,13 @@ import SystemUtils from 'gdbots/common/util/system-utils';
 import Identifier from 'gdbots/identifiers/identifier';
 import GeneratesIdentifier from 'gdbots/identifiers/generates-identifier';
 
+/**
+ * Holds private properties
+ *
+ * @var WeakMap
+ */
+let privateProps = new WeakMap();
+
 export default class UuidIdentifier extends SystemUtils.mixinClass(Identifier, GeneratesIdentifier)
 {
   /**
@@ -20,8 +27,10 @@ export default class UuidIdentifier extends SystemUtils.mixinClass(Identifier, G
       throw new Error('An invalid uuid [' + uuid + '] was provided.');
     }
 
-    /** @var string */
-    this.uuid = uuid;
+    privateProps.set(this, {
+      /** @var string */
+      uuid: uuid
+    });
   }
 
   /**
@@ -42,7 +51,7 @@ export default class UuidIdentifier extends SystemUtils.mixinClass(Identifier, G
    * {@inheritdoc}
    */
   toString() {
-    return this.uuid;
+    return privateProps.get(this).uuid;
   }
 
   /**

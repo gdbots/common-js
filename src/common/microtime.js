@@ -4,6 +4,13 @@ import DateUtils from 'gdbots/common/util/date-utils.js';
 import StringUtils from 'gdbots/common/util/string-utils.js';
 
 /**
+ * Holds private properties
+ *
+ * @var WeakMap
+ */
+let privateProps = new WeakMap();
+
+/**
  * Value object for microtime with methods to convert to and from integers.
  *
  * @link http://php.net/manual/en/function.microtime.php
@@ -15,18 +22,20 @@ export default class Microtime
    */
   constructor() {
 
-    /**
-     * The microtime is stored as a 16 digit integer.
-     *
-     * @var int
-     */
-    this.int = 0;
+    privateProps.set(this, {
+      /**
+       * The microtime is stored as a 16 digit integer.
+       *
+       * @var int
+       */
+      int: 0,
 
-    /** @var int */
-    this.sec = 0;
+      /** @var int */
+      sec: 0,
 
-    /** @var int */
-    this.usec = 0;
+      /** @var int */
+      usec: 0
+    });
   }
 
   /**
@@ -51,9 +60,9 @@ export default class Microtime
   static fromFloat(float) {
     let str = StringUtils.strPad(float.replace('.', ''), 16, '0').substring(0, 16);
     let m = new this();
-    m.int = parseInt(str);
-    m.sec = parseInt(str.substring(0, 10));
-    m.usec = parseInt(str.slice(-6));
+    privateProps.get(m).int = parseInt(str);
+    privateProps.get(m).sec = parseInt(str.substring(0, 10));
+    privateProps.get(m).usec = parseInt(str.slice(-6));
     return m;
   }
 
@@ -70,9 +79,9 @@ export default class Microtime
   static fromTimeOfDay(tod) {
     let str = tod.sec + StringUtils.strPad(tod.usec, 6, '0', 'STR_PAD_LEFT');
     let m = new this();
-    m.int = parseInt(str);
-    m.sec = parseInt(str.substring(0, 10));
-    m.usec = parseInt(str.slice(-6));
+    privateProps.get(m).int = parseInt(str);
+    privateProps.get(m).sec = parseInt(str.substring(0, 10));
+    privateProps.get(m).usec = parseInt(str.slice(-6));
     return m;
   }
 
@@ -100,9 +109,9 @@ export default class Microtime
     }
 
     let m = new this();
-    m.int = parseInt(int);
-    m.sec = parseInt(int.substring(0, 10));
-    m.usec = parseInt(int.slice(-6));
+    privateProps.get(m).int = parseInt(int);
+    privateProps.get(m).sec = parseInt(int.substring(0, 10));
+    privateProps.get(m).usec = parseInt(int.slice(-6));
     return m;
   }
 
@@ -110,21 +119,21 @@ export default class Microtime
    * @return string
    */
   toString() {
-    return String(this.int);
+    return String(privateProps.get(this).int);
   }
 
   /**
    * @return int
    */
   getSeconds() {
-    return this.sec;
+    return privateProps.get(this).sec;
   }
 
   /**
    * @return int
    */
   getMicroSeconds() {
-    return this.usec;
+    return privateProps.get(this).usec;
   }
 
   /**
@@ -132,7 +141,7 @@ export default class Microtime
    */
   toDateTime() {
     let d = new Date();
-    d.setTime(parseFloat(this.sec + '.' + StringUtils.strPad(this.usec, 6, '0', 'STR_PAD_LEFT')) * 1000);
+    d.setTime(parseFloat(privateProps.get(this).sec + '.' + StringUtils.strPad(privateProps.get(this).usec, 6, '0', 'STR_PAD_LEFT')) * 1000);
     return d;
   }
 
@@ -140,6 +149,6 @@ export default class Microtime
    * @return float
    */
   toFloat() {
-    return parseFloat(this.sec + '.' + StringUtils.strPad(this.usec, 6, '0', 'STR_PAD_LEFT'));
+    return parseFloat(privateProps.get(this).sec + '.' + StringUtils.strPad(privateProps.get(this).usec, 6, '0', 'STR_PAD_LEFT'));
   }
 }

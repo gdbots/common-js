@@ -5,6 +5,13 @@ import ToArray from 'gdbots/common/to-array';
 import SystemUtils from 'gdbots/common/util/system-utils';
 
 /**
+ * Holds private properties
+ *
+ * @var WeakMap
+ */
+let privateProps = new WeakMap();
+
+/**
  * Represents a GeoJson Point value.
  *
  * @link http://geojson.org/geojson-spec.html#point
@@ -20,17 +27,19 @@ export default class GeoPoint extends SystemUtils.mixinClass(null, FromArray, To
   constructor(lat, lon) {
     super(); // require before using `this`
 
-    /** @var float */
-    this.latitude = parseFloat(lat);
+    privateProps.set(this, {
+      /** @var float */
+      latitude: parseFloat(lat),
 
-    /** @var float */
-    this.longitude = parseFloat(lon);
+      /** @var float */
+      longitude: parseFloat(lon)
+    });
 
-    if (this.latitude > 90.0 || this.latitude < -90.0) {
+    if (privateProps.get(this).latitude > 90.0 || privateProps.get(this).latitude < -90.0) {
       throw new Error('Latitude must be within range [-90.0, 90.0]');
     }
 
-    if (this.longitude > 180.0 || this.longitude < -180.0) {
+    if (privateProps.get(this).longitude > 180.0 || privateProps.get(this).longitude < -180.0) {
       throw new Error('Longitude must be within range [-180.0, 180.0]');
     }
   }
@@ -39,14 +48,14 @@ export default class GeoPoint extends SystemUtils.mixinClass(null, FromArray, To
    * @return float
    */
   getLatitude() {
-    return this.latitude;
+    return privateProps.get(this).latitude;
   }
 
   /**
    * @return float
    */
   getLongitude() {
-    return this.longitude;
+    return privateProps.get(this).longitude;
   }
 
   /**
@@ -66,7 +75,7 @@ export default class GeoPoint extends SystemUtils.mixinClass(null, FromArray, To
   toArray() {
     return {
       'type': 'Point',
-      'coordinates': [this.longitude, this.latitude]
+      'coordinates': [privateProps.get(this).longitude, privateProps.get(this).latitude]
     };
   }
 
@@ -84,6 +93,6 @@ export default class GeoPoint extends SystemUtils.mixinClass(null, FromArray, To
    * @return string
    */
   toString() {
-    return this.latitude + ',' + this.longitude;
+    return privateProps.get(this).latitude + ',' + privateProps.get(this).longitude;
   }
 }

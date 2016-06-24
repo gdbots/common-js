@@ -5,6 +5,13 @@ import StringUtils from 'gdbots/common/util/string-utils';
 import SystemUtils from 'gdbots/common/util/system-utils';
 import Identifier from 'gdbots/identifiers/identifier';
 
+/**
+ * Holds private properties
+ *
+ * @var WeakMap
+ */
+let privateProps = new WeakMap();
+
 export default class SlugIdentifier extends SystemUtils.mixinClass(Identifier)
 {
   /**
@@ -23,8 +30,10 @@ export default class SlugIdentifier extends SystemUtils.mixinClass(Identifier)
       throw new Error('The value [' + slug + '] is not a valid slug.');
     }
 
-    /** @var string */
-    this.slug = slug;
+    privateProps.set(this, {
+      /** @var string */
+      slug: slug
+    });
   }
 
   /**
@@ -47,7 +56,7 @@ export default class SlugIdentifier extends SystemUtils.mixinClass(Identifier)
    * {@inheritdoc}
    */
   toString() {
-    return this.slug;
+    return privateProps.get(this).slug;
   }
 
   /**

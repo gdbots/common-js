@@ -4,6 +4,13 @@ import StringUtils from 'gdbots/common/util/string-utils';
 import SystemUtils from 'gdbots/common/util/system-utils';
 import Identifier from 'gdbots/identifiers/identifier';
 
+/**
+ * Holds private properties
+ *
+ * @var WeakMap
+ */
+let privateProps = new WeakMap();
+
 export default class StringIdentifier extends SystemUtils.mixinClass(Identifier)
 {
   /**
@@ -18,10 +25,12 @@ export default class StringIdentifier extends SystemUtils.mixinClass(Identifier)
       throw new Error('String expected but got [' + StringUtils.varToString(string) + '].');
     }
 
-    /** @var string */
-    this.string = String(string).trim();
+    privateProps.set(this, {
+      /** @var string */
+      string: String(string).trim()
+    });
 
-    if (!this.string || this.string.length === 0) {
+    if (!privateProps.get(this).string || privateProps.get(this).string.length === 0) {
       throw new Error('String cannot be empty.');
     }
   }
@@ -37,7 +46,7 @@ export default class StringIdentifier extends SystemUtils.mixinClass(Identifier)
    * {@inheritdoc}
    */
   toString() {
-    return this.string;
+    return privateProps.get(this).string;
   }
 
   /**
