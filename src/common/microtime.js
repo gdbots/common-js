@@ -98,14 +98,14 @@ export default class Microtime
    * @throws \InvalidArgumentException
    */
   static fromString(stringOrInteger) {
-    let int = parseInt(String(stringOrInteger));
+    let int = String(stringOrInteger);
     let len = String(int).length;
     if (len < 13 || len > 16) {
       throw new Error('Input [' + int + '] must be between 13 and 16 digits, [' + len + '] given.');
     }
 
     if (len < 16) {
-      int = parseInt(StringUtils.strPad(int, 16, '0'));
+      int = StringUtils.strPad(int, 16, '0');
     }
 
     let m = new this();
