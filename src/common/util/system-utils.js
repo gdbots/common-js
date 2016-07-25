@@ -62,7 +62,7 @@ export default class SystemUtils
    * @return mixed
    */
   static mixinClass(BaseClass, ...traits) {
-    if (null === BaseClass) {
+    if (null === BaseClass || 'undefined' === typeof BaseClass) {
       BaseClass = class EmptyBaseClass {};
     }
 
