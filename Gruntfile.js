@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         options: {
           moduleIds: true,
           getModuleId: function(moduleName) {
-            return 'gdbots/' + moduleName.substr(4);
+            return 'gdbots/common/' + moduleName.substr(4);
           },
           plugins: ['transform-es2015-modules-amd']
         },

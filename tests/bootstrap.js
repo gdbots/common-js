@@ -6,7 +6,7 @@ process.env.BABEL_DISABLE_CACHE = 1;
 require('babel-register')({
   plugins: [
     ['module-alias', [
-      { src: './src', expose: 'gdbots' }
+      { src: './src', expose: 'gdbots/common' }
     ]]
   ]
 });
