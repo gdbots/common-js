@@ -139,7 +139,7 @@ export default class StringUtils
    * @return string
    */
   static toCamelCase(str) {
-    return toSpaceCase(str).replace(/\s(\w)/g, function (matches, letter) {
+    return this.toSpaceCase(str).replace(/\s(\w)/g, function (matches, letter) {
       return letter.toUpperCase();
     });
   }
