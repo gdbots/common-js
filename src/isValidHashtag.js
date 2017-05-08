@@ -1,43 +1,38 @@
+import trimStart from 'lodash/trimStart';
+
 /**
  * Returns true if the provided value is a hashtag.
  *
+ * - must be alpha numeric (Current version does NOT support international hashtags.)
  * - must have at least one letter
- * - cannot start with an underscore (leading _ automatically removed)
+ * - cannot start with an underscore
  * - cannot be greater than 139 characters
  *
- * @see http://twitter.pbworks.com/w/page/1779812/Hashtags
+ * @link http://twitter.pbworks.com/w/page/1779812/Hashtags
  *
  * @param {string} hashtag
  *
  * @return {boolean}
  */
 export default function isValidHashtag(hashtag) {
-  /*
-  hashtag = ltrim(hashtag, '#');
-  if (empty(hashtag)) {
+  const trimmed = trimStart(hashtag, '#');
+
+  if (trimmed === '') {
     return false;
   }
 
-  $test = preg_replace('/[^a-zA-Z0-9_]/', '', hashtag);
-  if ($test !== hashtag) {
+  const sanitized = trimmed.replace(/[^a-zA-Z0-9_]/, '');
+  if (sanitized !== trimmed) {
     return false;
   }
 
-  if ('_' === hashtag[0]) {
+  if (trimmed[0] === '_') {
     return false;
   }
 
-  $len = strlen(hashtag);
-  if ($len > 139) {
+  if (trimmed.length > 139) {
     return false;
   }
 
-  for ($i = 0; $i < $len; $i++) {
-    if (!is_numeric(hashtag[$i])) {
-      return true;
-    }
-  }
-  */
-
-  return false;
+  return /[a-zA-Z]+/.test(trimmed);
 }
