@@ -3,7 +3,7 @@ import Enum from '../src/Enum';
 import IntEnum from './fixtures/IntEnum';
 import StringEnum from './fixtures/StringEnum';
 
-test('Enum immutability tests', function (assert) {
+test('Enum immutability tests', (assert) => {
   try {
     StringEnum.ENUM1 = 'test';
     assert.fail('StringEnum class is mutable');
@@ -37,7 +37,7 @@ test('Enum immutability tests', function (assert) {
   assert.end();
 });
 
-test('Enum flyweight tests', function (assert) {
+test('Enum flyweight tests', (assert) => {
   const test1 = StringEnum.create('val1');
   const test2 = StringEnum.create('val1');
   assert.true(StringEnum.ENUM1 === test1);
@@ -45,7 +45,7 @@ test('Enum flyweight tests', function (assert) {
   assert.true(test1 === test2);
 
   try {
-    const cantNew = new StringEnum('ENUM3', 'val3');
+    const cantNew = new StringEnum('ENUM3', 'val3'); // eslint-disable-line
     assert.fail('StringEnum instance can be created with "new".');
   } catch (e) {
     assert.pass('StringEnum instance cannot be created with "new".');
@@ -54,7 +54,7 @@ test('Enum flyweight tests', function (assert) {
   assert.end();
 });
 
-test('StringEnum tests', function (assert) {
+test('StringEnum tests', (assert) => {
   const test1 = StringEnum.create('val1');
   const test2 = StringEnum.create('val2');
 
@@ -87,7 +87,7 @@ test('StringEnum tests', function (assert) {
 
   assert.comment('Assert getKeys and getValues match.');
   assert.same(StringEnum.getKeys(), ['ENUM1', 'ENUM2']);
-  assert.same(StringEnum.getValues(), {ENUM1: 'val1', ENUM2: 'val2'});
+  assert.same(StringEnum.getValues(), { ENUM1: 'val1', ENUM2: 'val2' });
 
   assert.comment('Assert instance name/values match.');
   assert.equal(test1.getName(), 'ENUM1');
@@ -97,13 +97,13 @@ test('StringEnum tests', function (assert) {
   assert.equal(test1.toString(), 'val1');
   assert.equal(test1.toJSON(), 'val1');
   assert.equal(test1.valueOf(), 'val1');
-  assert.equal(''+test1, 'val1');
+  assert.equal(`${test1}`, 'val1');
   assert.equal(JSON.stringify(test1), '"val1"');
 
   assert.end();
 });
 
-test('IntEnum tests', function (assert) {
+test('IntEnum tests', (assert) => {
   const test1 = IntEnum.create(1);
   const test2 = IntEnum.create(2);
 
@@ -136,7 +136,7 @@ test('IntEnum tests', function (assert) {
 
   assert.comment('Assert getKeys and getValues match.');
   assert.same(IntEnum.getKeys(), ['ENUM1', 'ENUM2']);
-  assert.same(IntEnum.getValues(), {ENUM1: 1, ENUM2: 2});
+  assert.same(IntEnum.getValues(), { ENUM1: 1, ENUM2: 2 });
 
   assert.comment('Assert instance name/values match.');
   assert.equal(test1.getName(), 'ENUM1');
@@ -146,7 +146,7 @@ test('IntEnum tests', function (assert) {
   assert.equal(test1.toString(), '1');
   assert.equal(test1.toJSON(), 1);
   assert.equal(test1.valueOf(), 1);
-  assert.equal(''+test1, '1');
+  assert.equal(`${test1}`, '1');
   assert.equal(JSON.stringify(test1), '1');
 
   assert.end();

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import trimStart from 'lodash/trimStart';
 
 /**

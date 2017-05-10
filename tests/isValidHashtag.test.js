@@ -7,7 +7,7 @@ import isValidHashtag from '../src/isValidHashtag';
  * - cannot start with an underscore (leading _ automatically removed)
  * - cannot be greater than 139 characters
  */
-test('isValidHashtag tests', function (assert) {
+test('isValidHashtag tests', (assert) => {
   const valid = [
     '#HomerSimpsonIsCool',
     'HomerSimpsonIsCool',
@@ -17,7 +17,7 @@ test('isValidHashtag tests', function (assert) {
     'A'.repeat(139),
   ];
 
-  valid.forEach((hashtag) => assert.true(isValidHashtag(hashtag), `hashtag [${hashtag}] should be valid.`));
+  valid.forEach(hashtag => assert.true(isValidHashtag(hashtag), `hashtag [${hashtag}] should be valid.`));
 
   const invalid = [
     '#Homer Simpson Is Cool',
@@ -25,7 +25,7 @@ test('isValidHashtag tests', function (assert) {
     'Homer-Simpson-Is-Cool',
     '_Cannot_Start_With_Underscore',
     '#_Cannot_Start_With_Underscore',
-    'AHashtagShouldNotBeGreaterThan139Characters_' + 'HASHTAG'.repeat(14),
+    `AHashtagShouldNotBeGreaterThan139Characters_${'HASHTAG'.repeat(14)}`,
     '1111',
     '1111_',
     'BeyoncéKnowles',
@@ -42,7 +42,7 @@ test('isValidHashtag tests', function (assert) {
     '_1_2_3_4',
   ];
 
-  invalid.forEach((hashtag) => assert.false(isValidHashtag(hashtag), `hashtag [${hashtag}] should NOT be valid.`));
+  invalid.forEach(hashtag => assert.false(isValidHashtag(hashtag), `hashtag [${hashtag}] should NOT be valid.`));
 
   assert.end();
 });

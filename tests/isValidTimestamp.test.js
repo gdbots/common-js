@@ -1,7 +1,7 @@
 import test from 'tape';
 import isValidTimestamp from '../src/isValidTimestamp';
 
-test('isValidTimestamp (allowNegative=false) tests', function (assert) {
+test('isValidTimestamp (allowNegative=false) tests', (assert) => {
   const valid = [
     1494185675,
     '1494185675',
@@ -10,7 +10,7 @@ test('isValidTimestamp (allowNegative=false) tests', function (assert) {
     Number.MAX_SAFE_INTEGER,
   ];
 
-  valid.forEach((ts) => assert.true(isValidTimestamp(ts), `ts [${ts}] should be valid.`));
+  valid.forEach(ts => assert.true(isValidTimestamp(ts), `ts [${ts}] should be valid.`));
 
   const invalid = [
     'a',
@@ -20,13 +20,13 @@ test('isValidTimestamp (allowNegative=false) tests', function (assert) {
     -1,
   ];
 
-  invalid.forEach((ts) => assert.false(isValidTimestamp(ts), `ts [${ts}] should NOT be valid.`));
+  invalid.forEach(ts => assert.false(isValidTimestamp(ts), `ts [${ts}] should NOT be valid.`));
 
   assert.end();
 });
 
 
-test('isValidTimestamp (allowNegative=true) tests', function (assert) {
+test('isValidTimestamp (allowNegative=true) tests', (assert) => {
   const valid = [
     1494185675,
     '1494185675',
@@ -38,7 +38,7 @@ test('isValidTimestamp (allowNegative=true) tests', function (assert) {
     -12219292800,
   ];
 
-  valid.forEach((ts) => assert.true(isValidTimestamp(ts, true), `ts [${ts}] should be valid.`));
+  valid.forEach(ts => assert.true(isValidTimestamp(ts, true), `ts [${ts}] should be valid.`));
 
   const invalid = [
     'a',
@@ -51,7 +51,7 @@ test('isValidTimestamp (allowNegative=true) tests', function (assert) {
     -12219292801,
   ];
 
-  invalid.forEach((ts) => assert.false(isValidTimestamp(ts, true), `ts [${ts}] should NOT be valid.`));
+  invalid.forEach(ts => assert.false(isValidTimestamp(ts, true), `ts [${ts}] should NOT be valid.`));
 
   assert.end();
 });

@@ -1,4 +1,4 @@
-const INITIALIZED = Symbol();
+const INITIALIZED = Symbol('Enum is initialized');
 
 /**
  * This is an abstract class that is not intended to be
@@ -20,26 +20,26 @@ export default class Enum {
       throw new Error('Enum classes can\'t be instantiated');
     }
 
-    Object.defineProperty(this, 'name', {value: name, enumerable: true});
-    Object.defineProperty(this, 'value', {value: value, enumerable: true});
+    Object.defineProperty(this, 'name', { value: name, enumerable: true });
+    Object.defineProperty(this, 'value', { value, enumerable: true });
     Object.freeze(this);
   }
 
   /**
    * Configures the enum and closes the class.
    *
-   * @param {Object}  values   - An object whose properties provide the names and instances of the enum.
+   * @param {Object}  values   - An object with properties of the names and instances of the enum.
    * @param {?string} [enumId] - An identifier for this enum (generally used for @gdbots/pbj lib)
    */
   static configure(values, enumId = null) {
-    Object.defineProperty(this, 'instances', {value: {}});
-    Object.defineProperty(this, 'enumId', {value: enumId});
+    Object.defineProperty(this, 'instances', { value: {} });
+    Object.defineProperty(this, 'enumId', { value: enumId });
 
-    for (let key of Object.keys(values)) {
-      let instance = new this(key, values[key]);
-      Object.defineProperty(this, key, {value: instance, enumerable: true});
+    Object.keys(values).forEach((key) => {
+      const instance = new this(key, values[key]);
+      Object.defineProperty(this, key, { value: instance, enumerable: true });
       this.instances[key] = instance;
-    }
+    });
 
     Object.freeze(this.instances);
     this[INITIALIZED] = true;
@@ -53,7 +53,7 @@ export default class Enum {
    * @return {Enum}
    */
   static create(value) {
-    const instance = this.getKeys().filter(key => '' + this.instances[key].getValue() === '' + value);
+    const instance = this.getKeys().filter(key => `${this.instances[key].getValue()}` === `${value}`);
     if (!instance.length) {
       throw new Error(`Value "${value}" is not part of the enum "${this.getEnumId() || this.constructor.name}"`);
     }
@@ -102,7 +102,9 @@ export default class Enum {
    */
   static getValues() {
     const v = {};
-    this.getKeys().forEach(key => v[key] = this.instances[key].getValue());
+    this.getKeys().forEach((key) => {
+      v[key] = this.instances[key].getValue();
+    });
     return v;
   }
 
@@ -112,7 +114,7 @@ export default class Enum {
    * @return {string}
    */
   toString() {
-    return '' + this.value;
+    return `${this.value}`;
   }
 
   /**

@@ -6,16 +6,16 @@ import isValidHashtag from './isValidHashtag';
 
 // some punctuation and other chars are convertable
 const convertables = [
-  {s: "'", r: ''},
-  {s: '"', r: ''},
-  {s: '?', r: ''},
-  {s: '#', r: ''},
-  {s: '/', r: ''},
-  {s: '\\', r: ''},
-  {s: '&amp;', r: ' And '},
-  {s: '&', r: ' And '},
-  {s: '%', r: ' Percent '},
-  {s: '@', r: ' At '},
+  { s: "'", r: '' },
+  { s: '"', r: '' },
+  { s: '?', r: '' },
+  { s: '#', r: '' },
+  { s: '/', r: '' },
+  { s: '\\', r: '' },
+  { s: '&amp;', r: ' And ' },
+  { s: '&', r: ' And ' },
+  { s: '%', r: ' Percent ' },
+  { s: '@', r: ' At ' },
 ];
 
 /**
@@ -33,7 +33,7 @@ export default function createHashtag(str, camelize = true) {
   }
 
   let hashtag = trim(str, '#_ ');
-  convertables.forEach(({s, r}) => {
+  convertables.forEach(({ s, r }) => {
     hashtag = hashtag.split(s).join(r);
   });
 

@@ -15,16 +15,16 @@ const MIN_UTC_TIME = -12219292800;
  * @return {boolean}
  */
 export default function isValidTimestamp(timestamp, allowNegative = false) {
-  const timestampStr = '' + timestamp;
+  const timestampStr = `${timestamp}`;
   const timestampInt = toSafeInteger(timestamp);
 
   if (allowNegative) {
-    return ('' + timestampInt === timestampStr)
+    return (`${timestampInt}` === timestampStr)
       && (timestampInt <= toSafeInteger(Number.MAX_VALUE))
       && (timestampInt >= MIN_UTC_TIME);
   }
 
-  return ('' + timestampInt === timestampStr)
+  return (`${timestampInt}` === timestampStr)
     && (timestampInt <= toSafeInteger(Number.MAX_VALUE))
     && (timestampInt >= 0);
 }
