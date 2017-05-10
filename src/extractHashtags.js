@@ -1,3 +1,5 @@
+import trim from 'lodash/trim';
+import trimStart from 'lodash/trimStart';
 import isValidHashtag from './isValidHashtag';
 
 /**
@@ -6,8 +8,14 @@ import isValidHashtag from './isValidHashtag';
  *
  * @param {string} str
  *
- * @return {string[]}
+ * @return {string[]} - Unique array of hashtags without the "#"
  */
 export default function extractHashtags(str) {
-  return [];
+  const hashtags = new Map;
+  str.match(/[\s\S]#([a-z0-9_-]*)/gi)
+    .map(str => trimStart(trim(str), '#_'))
+    .filter(str => isValidHashtag(str))
+    .map(hashtag => hashtags.set(hashtag.toLowerCase(), hashtag));
+
+  return Array.from(hashtags.values());
 }
