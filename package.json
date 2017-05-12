@@ -11,10 +11,10 @@
     "clean": "rimraf lib",
     "test": "tape -r babel-register tests/**/*.test.js | faucet",
     "lint": "eslint src tests",
-    "build": "BABEL_ENV=commonjs babel src --out-dir lib",
+    "build": "echo 'DISABLED BABEL_ENV=commonjs babel src --out-dir lib'",
     "prepublish": "npm run clean && npm run lint && npm run test && npm run build"
   },
-  "main": "./lib/index.js",
+  "module": "./src/index.js",
   "dependencies": {
     "lodash": "^4.17.4"
   },
