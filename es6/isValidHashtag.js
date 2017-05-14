@@ -15,13 +15,13 @@ import trimStart from 'lodash-es/trimStart';
  * @return {boolean}
  */
 export default function isValidHashtag(hashtag) {
-  var trimmed = trimStart(hashtag, '#');
+  const trimmed = trimStart(hashtag, '#');
 
   if (trimmed === '') {
     return false;
   }
 
-  var sanitized = trimmed.replace(/[^a-zA-Z0-9_]/, '');
+  const sanitized = trimmed.replace(/[^a-zA-Z0-9_]/, '');
   if (sanitized !== trimmed) {
     return false;
   }

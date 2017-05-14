@@ -7,7 +7,7 @@ import trimStart from 'lodash-es/trimStart';
 import isValidHashtag from './isValidHashtag';
 
 // some punctuation and other chars are convertable
-var convertables = [{ s: "'", r: '' }, { s: '"', r: '' }, { s: '?', r: '' }, { s: '#', r: '' }, { s: '/', r: '' }, { s: '\\', r: '' }, { s: '&amp;', r: ' And ' }, { s: '&', r: ' And ' }, { s: '%', r: ' Percent ' }, { s: '@', r: ' At ' }];
+const convertables = [{ s: "'", r: '' }, { s: '"', r: '' }, { s: '?', r: '' }, { s: '#', r: '' }, { s: '/', r: '' }, { s: '\\', r: '' }, { s: '&amp;', r: ' And ' }, { s: '&', r: ' And ' }, { s: '%', r: ' Percent ' }, { s: '@', r: ' At ' }];
 
 /**
  * Creates a slug cased string (aka kebab case) from the provided string if possible.
@@ -18,8 +18,6 @@ var convertables = [{ s: "'", r: '' }, { s: '"', r: '' }, { s: '?', r: '' }, { s
  *
  * @return {?string}
  */
-export default function createSlug(str) {
-  var allowSlashes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
+export default function createSlug(str, allowSlashes = false) {
   return kebabCase(str);
 }

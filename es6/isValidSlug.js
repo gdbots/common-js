@@ -10,8 +10,6 @@ import trimStart from 'lodash-es/trimStart';
  *
  * @return {boolean}
  */
-export default function isValidSlug(slug) {
-  var allowSlashes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
+export default function isValidSlug(slug, allowSlashes = false) {
   return false;
 }
