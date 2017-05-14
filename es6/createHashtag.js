@@ -1,22 +1,11 @@
-import capitalize from 'lodash/capitalize';
-import deburr from 'lodash/deburr';
-import trim from 'lodash/trim';
-import trimStart from 'lodash/trimStart';
+import capitalize from 'lodash-es/capitalize';
+import deburr from 'lodash-es/deburr';
+import trim from 'lodash-es/trim';
+import trimStart from 'lodash-es/trimStart';
 import isValidHashtag from './isValidHashtag';
 
 // some punctuation and other chars are convertable
-const convertables = [
-  { s: "'", r: '' },
-  { s: '"', r: '' },
-  { s: '?', r: '' },
-  { s: '#', r: '' },
-  { s: '/', r: '' },
-  { s: '\\', r: '' },
-  { s: '&amp;', r: ' And ' },
-  { s: '&', r: ' And ' },
-  { s: '%', r: ' Percent ' },
-  { s: '@', r: ' At ' },
-];
+var convertables = [{ s: "'", r: '' }, { s: '"', r: '' }, { s: '?', r: '' }, { s: '#', r: '' }, { s: '/', r: '' }, { s: '\\', r: '' }, { s: '&amp;', r: ' And ' }, { s: '&', r: ' And ' }, { s: '%', r: ' Percent ' }, { s: '@', r: ' At ' }];
 
 /**
  * Creates a hashtag from the provided string if possible.
@@ -27,13 +16,18 @@ const convertables = [
  *
  * @return {?string}
  */
-export default function createHashtag(str, camelize = true) {
+export default function createHashtag(str) {
+  var camelize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
   if (isValidHashtag(str)) {
     return trimStart(str, '#');
   }
 
-  let hashtag = trim(str, '#_ ');
-  convertables.forEach(({ s, r }) => {
+  var hashtag = trim(str, '#_ ');
+  convertables.forEach(function (_ref) {
+    var s = _ref.s,
+        r = _ref.r;
+
     hashtag = hashtag.split(s).join(r);
   });
 

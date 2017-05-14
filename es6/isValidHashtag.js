@@ -1,4 +1,4 @@
-import trimStart from 'lodash/trimStart';
+import trimStart from 'lodash-es/trimStart';
 
 /**
  * Returns true if the provided value is a hashtag.
@@ -15,13 +15,13 @@ import trimStart from 'lodash/trimStart';
  * @return {boolean}
  */
 export default function isValidHashtag(hashtag) {
-  const trimmed = trimStart(hashtag, '#');
+  var trimmed = trimStart(hashtag, '#');
 
   if (trimmed === '') {
     return false;
   }
 
-  const sanitized = trimmed.replace(/[^a-zA-Z0-9_]/, '');
+  var sanitized = trimmed.replace(/[^a-zA-Z0-9_]/, '');
   if (sanitized !== trimmed) {
     return false;
   }
@@ -34,5 +34,6 @@ export default function isValidHashtag(hashtag) {
     return false;
   }
 
-  return /[a-zA-Z]+/.test(trimmed);
+  return (/[a-zA-Z]+/.test(trimmed)
+  );
 }
