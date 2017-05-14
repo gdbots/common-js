@@ -1,7 +1,7 @@
-import capitalize from 'lodash/capitalize';
-import deburr from 'lodash/deburr';
-import trim from 'lodash/trim';
-import trimStart from 'lodash/trimStart';
+import capitalize from 'lodash-es/capitalize';
+import deburr from 'lodash-es/deburr';
+import trim from 'lodash-es/trim';
+import trimStart from 'lodash-es/trimStart';
 import isValidHashtag from './isValidHashtag';
 
 // some punctuation and other chars are convertable

@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import trimStart from 'lodash/trimStart';
+import trimStart from 'lodash-es/trimStart';
 
 /**
  * Returns true if the provided value is a slug.

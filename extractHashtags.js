@@ -1,5 +1,5 @@
-import trim from 'lodash/trim';
-import trimStart from 'lodash/trimStart';
+import trim from 'lodash-es/trim';
+import trimStart from 'lodash-es/trimStart';
 import isValidHashtag from './isValidHashtag';
 
 /**
