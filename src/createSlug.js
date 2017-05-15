@@ -3,8 +3,6 @@
 import kebabCase from 'lodash/kebabCase';
 import deburr from 'lodash/deburr';
 import trim from 'lodash/trim';
-import trimStart from 'lodash/trimStart';
-import isValidHashtag from './isValidHashtag';
 
 // some punctuation and other chars are convertable
 const convertables = [
@@ -12,7 +10,6 @@ const convertables = [
   { s: '"', r: '' },
   { s: '?', r: '' },
   { s: '#', r: '' },
-  { s: '/', r: '' },
   { s: '\\', r: '' },
   { s: '&amp;', r: ' And ' },
   { s: '&', r: ' And ' },
@@ -30,5 +27,18 @@ const convertables = [
  * @return {?string}
  */
 export default function createSlug(str, allowSlashes = false) {
-  return kebabCase(str);
+  convertables.forEach(map => {
+    str = str.replace(map.s, map.r);
+  });
+
+  if (!allowSlashes) {
+    str = str.replace('/', '');
+    return kebabCase(str);
+  }
+
+  return trim(deburr(str)).replace(/[^a-zA-Z0-9\-\/]+/g, '-')
+                          .replace(/-+/g, '-')
+                          .replace(/\/+/g, '/')
+                          .replace(/(\/-)|(-\/)/g, '/')
+                          .toLowerCase();
 }
