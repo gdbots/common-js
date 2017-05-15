@@ -1,7 +1,7 @@
 {
   "name": "@gdbots/common",
   "version": "0.1.0",
-  "description": "Common classes and utils for js projects",
+  "description": "Common classes and utils for js projects.",
   "repository": {
     "type": "git",
     "url": "https://github.com/gdbots/common-js.git"
@@ -11,7 +11,7 @@
     "build": "BABEL_ENV=es6 babel src --out-dir ./es6/",
     "clean": "rimraf es6",
     "lint": "eslint src tests",
-    "postinstall": "cp -r ./es6/ .",
+    "postinstall": "mv ./es6/* . && npm run clean",
     "prepublish": "npm run clean && npm run lint && npm run test && npm run build",
     "test": "BABEL_ENV=cjs tape -r ./tests/babel-register.js ./tests/**/*.test.js | faucet"
   },
