@@ -2,6 +2,9 @@
 
 import trimStart from 'lodash/trimStart';
 
+const VALID_SLUG_PATTERN = /^[a-z0-9-]+$/;
+const VALID_DATED_SLUG_PATTERN = /^([a-z0-9-]|[a-z0-9-][a-z0-9-\/]*[a-z0-9-])$/;
+
 /**
  * Returns true if the provided value is a slug.
  *
@@ -11,5 +14,6 @@ import trimStart from 'lodash/trimStart';
  * @return {boolean}
  */
 export default function isValidSlug(slug, allowSlashes = false) {
-  return false;
+  const regex = allowSlashes ? VALID_DATED_SLUG_PATTERN : VALID_SLUG_PATTERN;
+  return trimStart(slug).match(regex) !== null;
 }
