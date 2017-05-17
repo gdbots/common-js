@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import removeDateFromSlug from './removeDateFromSlug';
+import isValidDate from './isValidDate';
 
 /**
  * Returns true if the provided value is a slug.
@@ -11,6 +12,10 @@ import removeDateFromSlug from './removeDateFromSlug';
  * @return {?string}
  */
 export default function addDateToSlug(slug, date) {
+  if (!isValidDate(date)) {
+    return null; // throw execption
+  }
+
   // date->format(YYYY/MM/DD) + removeDateFromSlug(slug)
   date = formatDate(date);
   slug = removeDateFromSlug(slug);
