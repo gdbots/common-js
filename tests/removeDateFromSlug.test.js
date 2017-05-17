@@ -8,6 +8,7 @@ test('removeDateFromSlug tests', (assert) => {
   // return;
 
   const slugs = [
+    { input: '2017/05/16', output: '' },
     { input: '2017/05/16/homer-simpson', output: 'homer-simpson' },
     { input: '/2017/05/16/2017/05/18/homer-simpson', output: 'homer-simpson' },
     { input: '2017/05/16/homer-simpson/2017/05/16/', output: 'homer-simpson/2017/05/16' },
