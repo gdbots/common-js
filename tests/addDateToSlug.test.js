@@ -3,7 +3,7 @@
 import test from 'tape';
 import addDateToSlug from '../src/addDateToSlug';
 
-test('addDateFromSlug tests', (assert) => {
+test('addDateToSlug tests', (assert) => {
   // assert.end();
   // return;
 
