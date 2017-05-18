@@ -12,6 +12,6 @@ import createSlug from './createSlug';
  * @return {?string}
  */
 export default function createSlugFromCamel(str, allowSlashes = false) {
-  str = trim(str).replace(/([A-Z0-9])/g, ' $1');
+  str = trim(str).replace(/([A-Z])/g, ' $1').replace(/([0-9]+)/g, ' $1');
   return createSlug(str, allowSlashes);
 }
