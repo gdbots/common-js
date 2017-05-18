@@ -1,7 +1,7 @@
 import test from 'tape';
 import isValidDate from '../src/isValidDate';
 
-test('isValidHashtag tests', (assert) => {
+test('isValidDate tests', (assert) => {
   const valid = [
     new Date,
     new Date('May 20 2017'),

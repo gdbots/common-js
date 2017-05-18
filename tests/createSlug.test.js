@@ -11,6 +11,8 @@ test('createSlug tests', (assert) => {
     { input: 'Homer simpson', output: 'homer-simpson' },
     { input: 'homer simpson', output: 'homer-simpson' },
     { input: 'homer sim@pson', output: 'homer-sim-at-pson' },
+    { input: 'homer simp123son', output: 'homer-simp-123-son' },
+    { input: 'homer simp123son', output: 'homer-simp-123-son', allowSlashes: true },
     { input: 'homer sim@ps/on', output: 'homer-sim-at-ps/on', allowSlashes: true },
     { input: 'homer sim@ps/() on ', output: 'homer-sim-at-ps/on', allowSlashes: true },
     { input: 'homer sim@ps/on', output: 'homer-sim-at-pson', allowSlashes: false },

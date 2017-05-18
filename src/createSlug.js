@@ -37,6 +37,7 @@ export default function createSlug(str, allowSlashes = false) {
   }
 
   return trim(deburr(str)).replace(/[^a-zA-Z0-9\-\/]+/g, '-')
+                          .replace(/(\d+)/g, '-$1-')
                           .replace(/-+/g, '-')
                           .replace(/\/+/g, '/')
                           .replace(/(\/-)|(-\/)/g, '/')
