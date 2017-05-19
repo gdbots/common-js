@@ -18,8 +18,8 @@ test('createSlug tests', (assert) => {
     { input: 'homer simp123son', output: 'homer-simp-123-son' },
     { input: 'homer simp123son', output: 'homer-simp-123-son', allowSlashes: true },
     { input: 'homer sim@ps/on', output: 'homer-sim-at-ps/on', allowSlashes: true },
-    { input: 'homer sim@ps/() on ', output: 'homer-sim-at-ps/on', allowSlashes: true },
     { input: 'homer sim@ps/on', output: 'homer-sim-at-ps-on', allowSlashes: false },
+    { input: 'homer sim@ps/() on ', output: 'homer-sim-at-ps/on', allowSlashes: true },
   ];
 
   samples.forEach(({ input, output, allowSlashes = false }) => {

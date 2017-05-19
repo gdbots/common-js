@@ -7,7 +7,7 @@ import removeDateFromSlug from './removeDateFromSlug';
  * @param  {Date} date
  * @return {string} YYYY/MM/DD formated date
  */
-export function formatSlugDate(date) {
+function formatSlugDate(date) {
   const year = date.getFullYear();
 
   let month = date.getMonth() + 1;

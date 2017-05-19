@@ -1,6 +1,7 @@
 import kebabCase from 'lodash/kebabCase';
 import deburr from 'lodash/deburr';
 import trim from 'lodash/trim';
+import isValidSlug from './isValidSlug';
 
 // some punctuation and other chars are convertable
 const convertables = [
@@ -40,7 +41,7 @@ export default function createSlug(str, allowSlashes = false) {
     strFiexed = strFiexed.replace(/[^a-zA-Z0-9\-/]+/g, '-');
     result = kebabCase(strFiexed);
 
-    return result === '' ? null : result;
+    return isValidSlug(result, false) ? result : null;
   }
 
   result = trim(strFiexed.replace(/[^a-zA-Z0-9\-/]+/g, '-')
@@ -48,7 +49,7 @@ export default function createSlug(str, allowSlashes = false) {
                         .replace(/-+/g, '-')
                         .replace(/\/+/g, '/')
                         .replace(/(\/-)|(-\/)/g, '/')
-                        .toLowerCase(), /(-|\/)/g);
+                        .toLowerCase(), /[-/]/g);
 
-  return result === '' ? null : result;
+  return isValidSlug(result, true) ? result : null;
 }

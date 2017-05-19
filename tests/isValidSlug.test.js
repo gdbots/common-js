@@ -8,6 +8,7 @@ test('isValidSlug tests', (assert) => {
     { slug: 'homer-simpson', allowSlashes: false },
     { slug: 'homer-simpson', allowSlashes: true },
     { slug: '2017/05/16/homer-simpson', allowSlashes: true },
+    { slug: 'homer-sim-at-ps/on', allowSlashes: true },
   ];
 
   valid.forEach(({ slug, allowSlashes = false }) => assert.true(isValidSlug(slug, allowSlashes), `slug [${slug}] should be valid.`));
