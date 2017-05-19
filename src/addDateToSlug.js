@@ -1,7 +1,27 @@
-/* eslint-disable */
-
+import isDate from 'lodash/isDate';
 import removeDateFromSlug from './removeDateFromSlug';
-import isValidDate from './isValidDate';
+
+/**
+ * Return the required date format in slug (YYYY/MM/DD)
+ *
+ * @param  {Date} date
+ * @return {string} YYYY/MM/DD formated date
+ */
+export function formatSlugDate(date) {
+  const year = date.getFullYear();
+
+  let month = date.getMonth() + 1;
+  if (month < 10) {
+    month = `0${month}`;
+  }
+
+  let day = date.getDate();
+  if (day < 10) {
+    day = `0${day}`;
+  }
+
+  return `${year}/${month}/${day}`;
+}
 
 /**
  * Returns true if the provided value is a slug.
@@ -11,38 +31,13 @@ import isValidDate from './isValidDate';
  *
  * @return {?string}
  */
-export default function addDateToSlug(slug, date) {
-  if (!isValidDate(date)) {
-    return null; // throw execption
+export default function addDateToSlug(slug, date = null) {
+  let d = date;
+  if (!isDate(d)) {
+    d = new Date();
   }
 
-  // date->format(YYYY/MM/DD) + removeDateFromSlug(slug)
-  date = formatDate(date);
-  slug = removeDateFromSlug(slug);
+  const s = removeDateFromSlug(slug);
 
-  return `${date}/${slug}`;
-}
-
-/**
- * Return the required date format in slug (YYYY/MM/DD)
- *
- * @param  {Date} date
- * @return {string} YYYY/MM/DD formated date
- */
-function formatDate(date) {
-  let year, month, day;
-
-  year = date.getFullYear();
-
-  month = date.getMonth() + 1;
-  if (month < 10) {
-    month = `0${month}`;
-  }
-
-  day = date.getDate();
-  if (day < 10) {
-    day = `0${day}`;
-  }
-
-  return `${year}/${month}/${day}`;
+  return `${formatSlugDate(d)}/${s}`;
 }

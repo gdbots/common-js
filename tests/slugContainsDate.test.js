@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import test from 'tape';
 import slugContainsDate from '../src/slugContainsDate';
 

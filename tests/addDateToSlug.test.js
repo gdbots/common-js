@@ -1,18 +1,14 @@
-/* eslint-disable */
-
 import test from 'tape';
-import addDateToSlug from '../src/addDateToSlug';
+import addDateToSlug, { formatSlugDate } from '../src/addDateToSlug';
 
 test('addDateToSlug tests', (assert) => {
-  // assert.end();
-  // return;
-
   const d = new Date(2017, 4, 20);
+  const today = formatSlugDate(new Date());
   const inputs = [
     { slug: '2017/05/16', output: '2017/05/20/' },
     { slug: 'homer-simpson', output: '2017/05/20/homer-simpson' },
     { slug: '2017/05/16/homer-simpson', output: '2017/05/20/homer-simpson' },
-    { slug: 'homer-simpson', date: 'invalid', output: null },
+    { slug: 'homer-simpson', date: 'invalid', output: `${today}/homer-simpson` },
   ];
 
   inputs.forEach(({ slug, date = d, output }) => {

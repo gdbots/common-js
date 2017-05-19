@@ -1,6 +1,6 @@
-/* eslint-disable */
-
 import trimStart from 'lodash/trimStart';
+
+const datePattern = /^\d{4}\/\d{2}\/\d{2}\/?(\S+)?/;
 
 /**
  * Detemines if the slug contains a date in the format YYYY/mm/dd
@@ -9,5 +9,5 @@ import trimStart from 'lodash/trimStart';
  * @return {boolean}
  */
 export default function slugContainsDate(slug) {
-  return trimStart(slug).match(/^\d{4}\/\d{2}\/\d{2}\/?(\S+)?/) !== null;
+  return datePattern.test(trimStart(slug));
 }

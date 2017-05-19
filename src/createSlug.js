@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import kebabCase from 'lodash/kebabCase';
 import deburr from 'lodash/deburr';
 import trim from 'lodash/trim';
@@ -27,19 +25,30 @@ const convertables = [
  * @return {?string}
  */
 export default function createSlug(str, allowSlashes = false) {
-  convertables.forEach(map => {
-    str = str.replace(map.s, map.r);
+  let strFiexed = trim(deburr(str));
+  let result = null;
+
+  if (!strFiexed) {
+    return result;
+  }
+
+  convertables.forEach(({ s, r = '' }) => {
+    strFiexed = strFiexed.replace(s, r);
   });
 
   if (!allowSlashes) {
-    str = str.replace('/', '');
-    return kebabCase(str);
+    strFiexed = strFiexed.replace(/[^a-zA-Z0-9\-/]+/g, '-');
+    result = kebabCase(strFiexed);
+
+    return result === '' ? null : result;
   }
 
-  return trim(deburr(str)).replace(/[^a-zA-Z0-9\-\/]+/g, '-')
-                          .replace(/(\d+)/g, '-$1-')
-                          .replace(/-+/g, '-')
-                          .replace(/\/+/g, '/')
-                          .replace(/(\/-)|(-\/)/g, '/')
-                          .toLowerCase();
+  result = trim(strFiexed.replace(/[^a-zA-Z0-9\-/]+/g, '-')
+                        .replace(/(\d+)/g, '-$1-')
+                        .replace(/-+/g, '-')
+                        .replace(/\/+/g, '/')
+                        .replace(/(\/-)|(-\/)/g, '/')
+                        .toLowerCase(), /(-|\/)/g);
+
+  return result === '' ? null : result;
 }

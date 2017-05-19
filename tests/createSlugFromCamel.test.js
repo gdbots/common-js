@@ -1,12 +1,7 @@
-/* eslint-disable */
-
 import test from 'tape';
 import createSlugFromCamel from '../src/createSlugFromCamel';
 
 test('createSlugFromCamel tests', (assert) => {
-  // assert.end();
-  // return;
-
   const samples = [
     { input: 'HomerSimpson', output: 'homer-simpson' },
     { input: 'SIMPSON', output: 's-i-m-p-s-o-n' },

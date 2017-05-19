@@ -1,8 +1,7 @@
-/* eslint-disable */
-
-import forEach from 'lodash/forEach';
 import trim from 'lodash/trim';
 import trimStart from 'lodash/trimStart';
+
+const datePattern = /^\d{4}\/\d{2}\/\d{2}\/?(\S+)?/;
 
 /**
  * Removes the date in the format YYYY/mm/dd from the slug if it is fou
@@ -11,14 +10,14 @@ import trimStart from 'lodash/trimStart';
  *
  * @return {?string}
  */
-
 export default function removeDateToSlug(slug) {
-  slug = trim(slug, '/');
-
+  let s = trim(slug, '/');
   let match;
-  while((match = slug.match(/^\d{4}\/\d{2}\/\d{2}\/?(\S+)?/)) !== null) {
-    slug = trimStart(match[1] ? match[1] : '', '/');
+
+  while (datePattern.test(s)) {
+    match = s.match(datePattern);
+    s = trimStart(match[1] ? match[1] : '', '/');
   }
 
-  return slug;
+  return s;
 }

@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import trim from 'lodash/trim';
 import createSlug from './createSlug';
 
@@ -12,6 +10,6 @@ import createSlug from './createSlug';
  * @return {?string}
  */
 export default function createSlugFromCamel(str, allowSlashes = false) {
-  str = trim(str).replace(/([A-Z])/g, ' $1').replace(/([0-9]+)/g, ' $1');
-  return createSlug(str, allowSlashes);
+  const s = trim(str).replace(/([A-Z])/g, ' $1').replace(/([0-9]+)/g, ' $1');
+  return createSlug(s, allowSlashes);
 }
