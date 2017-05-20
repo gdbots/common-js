@@ -1,0 +1,24 @@
+import trim from 'lodash/trim';
+import startsWith from 'lodash/startsWith';
+import endsWith from 'lodash/endsWith';
+import isValidIpv4 from './isValidIpv4';
+
+const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})$/;
+
+/**
+ * Returns true if the provided value is a email address.
+ *
+ * @param {string} email
+ *
+ * @return {boolean}
+ */
+export default function isValidEmail(email) {
+  let ipInEmail = trim(email).split('@')[1];
+
+  if (ipInEmail && startsWith(ipInEmail, '[') && endsWith(ipInEmail, ']')) {
+    ipInEmail = trim(ipInEmail, /[|]/);
+    return isValidIpv4(ipInEmail);
+  }
+
+  return EMAIL_PATTERN.test(trim(email));
+}
