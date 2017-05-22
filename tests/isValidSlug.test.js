@@ -3,11 +3,14 @@ import isValidSlug from '../src/isValidSlug';
 
 test('isValidSlug tests', (assert) => {
   const valid = [
+    { slug: 't' },
     { slug: 'test' },
+    { slug: '1-2' },
     { slug: 'homer-simpson' },
     { slug: 'homer-simpson', allowSlashes: false },
-    { slug: 'homer-simpson', allowSlashes: true },
+    { slug: 'homer/simpson', allowSlashes: true },
     { slug: '2017/05/16/homer-simpson', allowSlashes: true },
+    { slug: '2017/05/16/homer-simpson/2017/01/02', allowSlashes: true },
     { slug: 'homer-sim-at-ps/on', allowSlashes: true },
   ];
 
@@ -17,12 +20,19 @@ test('isValidSlug tests', (assert) => {
     { slug: null },
     { slug: ' ' },
     { slug: '-' },
+    { slug: '_' },
+    { slug: 3.14 },
     { slug: '-', allowSlashes: true },
     { slug: '/', allowSlashes: true },
+    { slug: 'beyoncéknowles' },
     { slug: 'Homer-simpson' },
+    { slug: 'homer*simpson' },
+    { slug: 'homer_simpson' },
     { slug: 'homer simpson', allowSlashes: false },
+    { slug: 'homer-simpson/', allowSlashes: true },
     { slug: '2017/05/16/homer-simpson', allowSlashes: false },
     { slug: '2017/05/16/ homer-simpson', allowSlashes: true },
+    { 'slug': '(ﾉ °益°)ﾉ 彡 ┻━┻'},
   ];
 
   invalid.forEach(({ slug, allowSlashes = false }) => assert.false(isValidSlug(slug, allowSlashes), `slug [${slug}] should NOT be valid.`));

@@ -4,6 +4,7 @@ import isValidUrl from '../src/isValidUrl';
 test('isValidUrl tests', (assert) => {
   const valid = [
     'http://www.test.com',
+    'http://1.2.me',
     'http://test.com',
     'http://www.test.com.us',
     'http://sub.test.net',

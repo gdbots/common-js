@@ -14,11 +14,12 @@ test('isValidIpv4 tests', (assert) => {
     null,
     '#@%.^%.#$@#.$@#',
     '192.168.1.1a',
+    '192.168.01.1',
     '.192.168.1',
     '192.168.1',
     '192.168.1.',
     '192.168.1.1.2',
-    '192.256.1.1',
+    '192.168.1.256',
   ];
 
   invalid.forEach(ip => assert.false(isValidIpv4(ip), `ip [${ip}] should NOT be valid ipv4.`));
