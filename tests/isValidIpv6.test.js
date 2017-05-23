@@ -572,7 +572,11 @@ test('isValidIpv6 tests', (assert) => {
     [false, ':10.0.0.1'],
   ];
 
-  testcases.forEach(testcase => assert.equals(testcase[0], isValidIpv6(testcase[1]), `${testcase[1]} should return ${testcase[0]}`));
+  testcases.forEach((testcase) => {
+    const actual = isValidIpv6(testcase[1]);
+    const expected = testcase[0];
+    assert.same(actual, expected, `${testcase[1]} should return ${expected}`);
+  });
 
   assert.end();
 });
