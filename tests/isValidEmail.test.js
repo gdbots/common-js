@@ -21,6 +21,7 @@ test('isValidEmail tests', (assert) => {
     '#@%^%#$@#$@#.com',
     'foo@bar',
     'fo@o@bar',
+    ' example@domain.com',
     '@domain.com',
     'Joe Smith <email@domain.com>',
     'foo@ba$r.com',

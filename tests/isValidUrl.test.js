@@ -54,6 +54,7 @@ test('isValidUrl tests', (assert) => {
     'rdar://1234',
     'h://test',
     'http:// shouldfail.com',
+    ' http://shouldfail.com',
     ':// should fail',
     'http://foo.bar/foo(bar)baz quux',
     'ftps://foo.bar/',

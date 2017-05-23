@@ -9,6 +9,7 @@ test('isValidHostname tests', (assert) => {
     { output: true, value: 'abc' },
     { output: true, value: '28999x' },
 
+    { output: false, value: ' mydomain.com' },
     { output: false, value: '28999' },
     { output: false, value: 'http://www.mydomain.com' },
     { output: false, value: 'www.mydomain.com/page' },

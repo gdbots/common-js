@@ -24,6 +24,7 @@ test('isValidSlug tests', (assert) => {
     { slug: 3.14 },
     { slug: '-', allowSlashes: true },
     { slug: '/', allowSlashes: true },
+    { slug: 'homer-simpson ' },
     { slug: 'beyoncéknowles' },
     { slug: 'Homer-simpson' },
     { slug: 'homer*simpson' },

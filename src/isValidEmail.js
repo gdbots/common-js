@@ -13,12 +13,15 @@ const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"
  * @return {boolean}
  */
 export default function isValidEmail(email) {
-  let ipInEmail = trim(email).split('@')[1];
+  if (!email) {
+    return false;
+  }
 
+  let ipInEmail = email.split('@')[1];
   if (ipInEmail && startsWith(ipInEmail, '[') && endsWith(ipInEmail, ']')) {
     ipInEmail = trim(ipInEmail, /[|]/);
     return isValidIpv4(ipInEmail);
   }
 
-  return EMAIL_PATTERN.test(trim(email));
+  return EMAIL_PATTERN.test(email);
 }

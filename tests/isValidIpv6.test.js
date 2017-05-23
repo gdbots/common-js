@@ -23,10 +23,10 @@ test('isValidIpv6 tests', (assert) => {
     [true, '::ffff:192.168.1.26'],
     [false, '02001:0000:1234:0000:0000:C1C0:ABCD:0876'],
     [false, '2001:0000:1234:0000:00001:C1C0:ABCD:0876'],
-    [true, ' 2001:0000:1234:0000:0000:C1C0:ABCD:0876'],
-    [true, ' 2001:0:1234::C1C0:ABCD:876'],
-    [true, ' 2001:0000:1234:0000:0000:C1C0:ABCD:0876  '],
-    [true, ' 2001:0:1234::C1C0:ABCD:876  '],
+    [false, ' 2001:0000:1234:0000:0000:C1C0:ABCD:0876'],
+    [false, ' 2001:0:1234::C1C0:ABCD:876'],
+    [false, ' 2001:0000:1234:0000:0000:C1C0:ABCD:0876  '],
+    [false, ' 2001:0:1234::C1C0:ABCD:876  '],
     [false, ' 2001:0000:1234:0000:0000:C1C0:ABCD:0876  0'],
     [false, '2001:0000:1234: 0000:0000:C1C0:ABCD:0876'],
     [false, '2001:1:1:1:1:1:255Z255X255Y255'],
@@ -433,13 +433,13 @@ test('isValidIpv6 tests', (assert) => {
     [false, '2001:DB8:0:0:8:800:200C:417A:221'], // unicast, full
     [false, 'FF01::101::2'], // multicast, compressed
     [false, '02001:0000:1234:0000:0000:C1C0:ABCD:0876'],
-    // extra 0 not allowed!
     [false, '2001:0000:1234:0000:00001:C1C0:ABCD:0876'],
-    [true, ' 2001:0000:1234:0000:0000:C1C0:ABCD:0876'],
+    // extra 0 not allowed!
+    [false, ' 2001:0000:1234:0000:0000:C1C0:ABCD:0876'],
     // leading space
-    [true, '2001:0000:1234:0000:0000:C1C0:ABCD:0876'],
+    [false, ' 2001:0000:1234:0000:0000:C1C0:ABCD:0876'],
     // trailing space
-    [true, ' 2001:0000:1234:0000:0000:C1C0:ABCD:0876  '],
+    [false, '2001:0000:1234:0000:0000:C1C0:ABCD:0876  '],
     // leading and trailing space
     [false, '2001:0000:1234:0000:0000:C1C0:ABCD:0876  0'],
     // junk after valid address
