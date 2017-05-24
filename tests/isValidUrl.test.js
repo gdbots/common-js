@@ -81,6 +81,7 @@ test('isValidUrl tests', (assert) => {
     'emailto:info@example.com',
     'urn:isbn:0451450523',
     'mailto:user@[255:192:168:1]',
+    'mailto:user@[info@example.com]',
   ];
 
   invalid.forEach(url => assert.false(isValidUrl(url), `url [${url}] should NOT be valid.`));
