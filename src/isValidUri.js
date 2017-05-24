@@ -1,7 +1,7 @@
 import isValidUrl from './isValidUrl';
 import isValidUrn from './isValidUrn';
 
-const URI_PATTERN = /^(?:[a-z0-9][a-z0-9-]{1,31}:(?:[a-z0-9()+,-.:=@;$_!*']|%(?:2[1-9a-f]|[3-6][0-9a-f]|7[0-9a-e]))+)$/i;
+const GENERIC_URI_PATTERN = /^(?:[a-z0-9][a-z0-9-]{1,31}:(?:[a-z0-9()+,-.:=@;$_!*']|%(?:2[1-9a-f]|[3-6][0-9a-f]|7[0-9a-e]))+)$/i;
 /**
  * Returns true if the provided value is a uri.
  * The most common form of URI is the Uniform Resource Locator (URL),
@@ -16,9 +16,5 @@ const URI_PATTERN = /^(?:[a-z0-9][a-z0-9-]{1,31}:(?:[a-z0-9()+,-.:=@;$_!*']|%(?:
  * @return {boolean}
  */
 export default function isValidUri(uri) {
-  if (isValidUrl(uri) || isValidUrn(uri) || URI_PATTERN.test(uri)) {
-    return true;
-  }
-
-  return false;
+  return isValidUrl(uri) || isValidUrn(uri) || GENERIC_URI_PATTERN.test(uri);
 }

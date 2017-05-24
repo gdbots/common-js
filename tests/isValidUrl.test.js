@@ -37,6 +37,8 @@ test('isValidUrl tests', (assert) => {
   valid.forEach(url => assert.true(isValidUrl(url), `url [${url}] should be valid.`));
 
   const invalid = [
+    null,
+    ' ',
     'http://',
     'http://.',
     'http://..',

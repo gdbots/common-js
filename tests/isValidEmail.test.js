@@ -19,6 +19,8 @@ test('isValidEmail tests', (assert) => {
 
   const invalid = [
     null,
+    ' ',
+    '\t',
     '#@%^%#$@#$@#.com',
     'foo@bar',
     'fo@o@bar',
@@ -27,6 +29,7 @@ test('isValidEmail tests', (assert) => {
     'Joe Smith <email@domain.com>',
     'foo@ba$r.com',
     'email@123.123.123.123',
+    'foo@[bar].com',
     'email@[123.123.123.300]',
     'user@[192:168:1:1]',
     'user@[2001:DB8:1]',
