@@ -28,6 +28,10 @@ test('isValidUrl tests', (assert) => {
     'http://foo.bar?q=Spaces+has+been+encoded',
     'http://10.1.1.254',
     'http://localhost',
+    'mailto:info@example.com',
+    'mailto:user@[255.192.168.1]',
+    'htt://shouldpass.com',
+    'http://[2001:db8:a0b:12f0::1]/test',
   ];
 
   valid.forEach(url => assert.true(isValidUrl(url), `url [${url}] should be valid.`));
@@ -52,6 +56,8 @@ test('isValidUrl tests', (assert) => {
     'foo.com',
     'rdar://1234',
     'h://test',
+    'http:shouldfail.com',
+    'http:/shouldfail.com',
     'http:// shouldfail.com',
     ' http://www.shouldfail.com',
     ':// should fail',
@@ -70,6 +76,9 @@ test('isValidUrl tests', (assert) => {
     'http://⌘.ws',
     'http://foo.com/unicode_(✪)_in_parens',
     'http://☺.damowmow.com/',
+    'emailto:info@example.com',
+    'urn:isbn:0451450523',
+    'mailto:user@[255:192:168:1]',
   ];
 
   invalid.forEach(url => assert.false(isValidUrl(url), `url [${url}] should NOT be valid.`));

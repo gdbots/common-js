@@ -9,6 +9,7 @@ test('isValidEmail tests', (assert) => {
     'foo+bar@bar.com',
     '"email"@domain.com',
     'email@[123.123.123.123]',
+    'user@[2001:DB8::1]',
     'foo_12345@bar-dash.com',
     '_______@domain.com',
     '123@123.net',
@@ -27,6 +28,8 @@ test('isValidEmail tests', (assert) => {
     'foo@ba$r.com',
     'email@123.123.123.123',
     'email@[123.123.123.300]',
+    'user@[192:168:1:1]',
+    'user@[2001:DB8:1]',
     'email@domain..com',
     'foo.bar.baz',
   ];
