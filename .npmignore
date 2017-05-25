@@ -1,0 +1,10 @@
+/build/
+/dist/
+/src/
+/tests/
+.babelrc
+.codeclimate.yml
+.editorconfig
+.eslint*
+.nvmrc
+.travis.yml

@@ -1,20 +1,39 @@
 {
   "name": "@gdbots/common",
   "version": "0.1.0",
-  "description": "Common classes and utils for js projects",
+  "description": "Common classes and utils for js projects.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gdbots/common-js.git"
+  },
   "license": "Apache-2.0",
+  "scripts": {
+    "build": "BABEL_ENV=es6 babel src --out-dir ./dist/ && cp -R ./dist/* .",
+    "clean": "rimraf dist",
+    "lint": "eslint src tests",
+    "prepublish": "npm run clean && npm run lint && npm run test && npm run build",
+    "test": "BABEL_ENV=cjs tape -r ./tests/babel-register.js './tests/**/*.test.js' | faucet"
+  },
+  "module": "./index.js",
+  "jsnext:main": "./index.js",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "lodash-es": "^4.17.4"
+  },
   "devDependencies": {
-    "chai": "~3.5",
-    "grunt": "~0.4",
-    "grunt-babel": "~6.0",
-    "babel-register": "~6.9",
-    "babel-plugin-module-alias": "~1.4",
-    "babel-preset-es2015": "~6.9",
-    "babel-plugin-transform-es2015-modules-amd": "~6.8",
-    "grunt-contrib-watch": "~0.6",
-    "grunt-contrib-concat": "~0.5",
-    "grunt-contrib-uglify": "~0.10",
-    "grunt-shell": "~1.3",
-    "grunt-mocha-test": "~0.12"
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-preset-env": "^1.4.0",
+    "babel-register": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "faucet": "^0.0.1",
+    "rimraf": "^2.6.1",
+    "tape": "^4.6.3"
   }
 }
