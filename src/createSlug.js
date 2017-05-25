@@ -47,8 +47,8 @@ export default function createSlug(str, allowSlashes = false) {
   result = trim(strFixed.replace(/[^a-zA-Z0-9\-/]+/g, '-')
     .replace(/(\d+)/g, '-$1-')
     .replace(/-+/g, '-')
-    .replace(/\/+/g, '/')
     .replace(/(\/-)|(-\/)/g, '/')
+    .replace(/\/+/g, '/')
     .toLowerCase(), /[-/]/g);
 
   return isValidSlug(result, true) ? result : null;
