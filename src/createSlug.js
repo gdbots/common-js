@@ -26,30 +26,30 @@ const convertables = [
  * @return {?string}
  */
 export default function createSlug(str, allowSlashes = false) {
-  let strFiexed = trim(deburr(str));
+  let strFixed = trim(deburr(str));
   let result = null;
 
-  if (!strFiexed) {
+  if (!strFixed) {
     return result;
   }
 
   convertables.forEach(({ s, r = '' }) => {
-    strFiexed = strFiexed.replace(s, r);
+    strFixed = strFixed.replace(s, r);
   });
 
   if (!allowSlashes) {
-    strFiexed = strFiexed.replace(/[^a-zA-Z0-9\-/]+/g, '-');
-    result = kebabCase(strFiexed);
+    strFixed = strFixed.replace(/[^a-zA-Z0-9\-/]+/g, '-');
+    result = kebabCase(strFixed);
 
     return isValidSlug(result, false) ? result : null;
   }
 
-  result = trim(strFiexed.replace(/[^a-zA-Z0-9\-/]+/g, '-')
-                        .replace(/(\d+)/g, '-$1-')
-                        .replace(/-+/g, '-')
-                        .replace(/\/+/g, '/')
-                        .replace(/(\/-)|(-\/)/g, '/')
-                        .toLowerCase(), /[-/]/g);
+  result = trim(strFixed.replace(/[^a-zA-Z0-9\-/]+/g, '-')
+    .replace(/(\d+)/g, '-$1-')
+    .replace(/-+/g, '-')
+    .replace(/\/+/g, '/')
+    .replace(/(\/-)|(-\/)/g, '/')
+    .toLowerCase(), /[-/]/g);
 
   return isValidSlug(result, true) ? result : null;
 }

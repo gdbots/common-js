@@ -1,8 +1,7 @@
-/* eslint-disable */
-
 import kebabCase from 'lodash-es/kebabCase';
 import deburr from 'lodash-es/deburr';
 import trim from 'lodash-es/trim';
+import isValidSlug from './isValidSlug';
 
 // some punctuation and other chars are convertable
 const convertables = [{ s: "'", r: '' }, { s: '"', r: '' }, { s: '?', r: '' }, { s: '#', r: '' }, { s: '\\', r: '' }, { s: '&amp;', r: ' And ' }, { s: '&', r: ' And ' }, { s: '%', r: ' Percent ' }, { s: '@', r: ' At ' }];
@@ -17,14 +16,25 @@ const convertables = [{ s: "'", r: '' }, { s: '"', r: '' }, { s: '?', r: '' }, {
  * @return {?string}
  */
 export default function createSlug(str, allowSlashes = false) {
-  convertables.forEach(map => {
-    str = str.replace(map.s, map.r);
+  let strFiexed = trim(deburr(str));
+  let result = null;
+
+  if (!strFiexed) {
+    return result;
+  }
+
+  convertables.forEach(({ s, r = '' }) => {
+    strFiexed = strFiexed.replace(s, r);
   });
 
   if (!allowSlashes) {
-    str = str.replace('/', '');
-    return kebabCase(str);
+    strFiexed = strFiexed.replace(/[^a-zA-Z0-9\-/]+/g, '-');
+    result = kebabCase(strFiexed);
+
+    return isValidSlug(result, false) ? result : null;
   }
 
-  return trim(deburr(str)).replace(/[^a-zA-Z0-9\-\/]+/g, '-').replace(/-+/g, '-').replace(/\/+/g, '/').replace(/(\/-)|(-\/)/g, '/').toLowerCase();
+  result = trim(strFiexed.replace(/[^a-zA-Z0-9\-/]+/g, '-').replace(/(\d+)/g, '-$1-').replace(/-+/g, '-').replace(/\/+/g, '/').replace(/(\/-)|(-\/)/g, '/').toLowerCase(), /[-/]/g);
+
+  return isValidSlug(result, true) ? result : null;
 }
