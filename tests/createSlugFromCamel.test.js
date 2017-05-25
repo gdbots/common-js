@@ -8,6 +8,7 @@ test('createSlugFromCamel tests', (assert) => {
     { input: 'homerSimpson', output: 'homer-simpson' },
     { input: 'HomerSim123pson', output: 'homer-sim-123-pson' },
     { input: '1HomerSimpson', output: '1-homer-simpson' },
+    { input: 'Mc_Hammer', output: 'mc-hammer' },
   ];
 
   samples.forEach(({ input, output, allowSlashes = false }) => {

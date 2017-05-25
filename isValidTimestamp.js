@@ -12,7 +12,7 @@ const MIN_UTC_TIME = -12219292800;
  * @param {string} timestamp
  * @param {boolean} [allowNegative]
  *
- * @return {boolean}
+ * @returns {boolean}
  */
 export default function isValidTimestamp(timestamp, allowNegative = false) {
   const timestampStr = `${timestamp}`;

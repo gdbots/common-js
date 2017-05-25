@@ -14,7 +14,7 @@ const convertables = [{ s: "'", r: '' }, { s: '"', r: '' }, { s: '?', r: '' }, {
  * @param {string} str
  * @param {boolean} [camelize]
  *
- * @return {?string}
+ * @returns {?string}
  */
 export default function createHashtag(str, camelize = true) {
   if (isValidHashtag(str)) {

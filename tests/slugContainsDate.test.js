@@ -6,7 +6,7 @@ test('slugContainsDate tests', (assert) => {
   assert.true(slugContainsDate(slugHasDates), `slug [${slugHasDates}] should contains date.`);
 
   const slugHasNoDates = ['homer-simpson', 'homer-simpson/2017/05/16/'];
-  slugHasNoDates.forEach(({ slug }) => assert.false(slugContainsDate(slug), `slug [${slug}] should NOT be valid.`));
+  slugHasNoDates.forEach(slug => assert.false(slugContainsDate(slug), `slug [${slug}] should NOT be valid.`));
 
   assert.end();
 });

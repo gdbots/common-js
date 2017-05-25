@@ -3,7 +3,7 @@ import toInteger from 'lodash-es/toInteger';
 export default class Exception extends Error {
   /**
    * @param {string} message - The error message itself.
-   * @param {number} code    - A code for this exception.
+   * @param {number} [code]  - A code for this exception.
    */
   constructor(message, code = 0) {
     super(message);
@@ -12,14 +12,14 @@ export default class Exception extends Error {
   }
 
   /**
-   * @return {string}
+   * @returns {string}
    */
   getName() {
     return this.name;
   }
 
   /**
-   * @return {string}
+   * @returns {string}
    */
   getMessage() {
     return this.message;
@@ -30,7 +30,7 @@ export default class Exception extends Error {
    *
    * @link https://github.com/gdbots/schemas/blob/master/schemas/gdbots/pbjx/enums.xml#L8
    *
-   * @return {number}
+   * @returns {number}
    */
   getCode() {
     return this.code;

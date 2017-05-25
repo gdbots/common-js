@@ -1,5 +1,5 @@
-import trim from 'lodash-es/trim';
 import startsWith from 'lodash-es/startsWith';
+import trim from 'lodash-es/trim';
 
 const VALID_SLUG_PATTERN = /^([a-z0-9]-?)*[a-z0-9]$/;
 const VALID_DATED_SLUG_PATTERN = /^([a-z0-9-]|[a-z0-9-][a-z0-9-/]*[a-z0-9-])$/;
@@ -10,7 +10,7 @@ const VALID_DATED_SLUG_PATTERN = /^([a-z0-9-]|[a-z0-9-][a-z0-9-/]*[a-z0-9-])$/;
  * @param {string} slug
  * @param {boolean} [allowSlashes]
  *
- * @return {boolean}
+ * @returns {boolean}
  */
 export default function isValidSlug(slug, allowSlashes = false) {
   if (!trim(slug)) {

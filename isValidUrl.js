@@ -1,5 +1,5 @@
-import startsWith from 'lodash/startsWith';
-import trimStart from 'lodash/trimStart';
+import startsWith from 'lodash-es/startsWith';
+import trimStart from 'lodash-es/trimStart';
 import isValidEmail from './isValidEmail';
 import isValidIpv6 from './isValidIpv6';
 

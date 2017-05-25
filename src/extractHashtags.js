@@ -8,7 +8,7 @@ import isValidHashtag from './isValidHashtag';
  *
  * @param {string} str
  *
- * @return {string[]} - Unique array of hashtags without the "#"
+ * @returns {string[]} - Unique array of hashtags without the "#"
  */
 export default function extractHashtags(str) {
   const hashtags = new Map();

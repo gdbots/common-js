@@ -25,7 +25,7 @@ const convertables = [
  * @param {string} str
  * @param {boolean} [camelize]
  *
- * @return {?string}
+ * @returns {?string}
  */
 export default function createHashtag(str, camelize = true) {
   if (isValidHashtag(str)) {

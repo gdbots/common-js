@@ -27,4 +27,3 @@ test('Exception tests', (assert) => {
 
   assert.end();
 });
-

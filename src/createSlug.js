@@ -23,7 +23,7 @@ const convertables = [
  * @param {string} str
  * @param {boolean} [allowSlashes]
  *
- * @return {?string}
+ * @returns {?string}
  */
 export default function createSlug(str, allowSlashes = false) {
   let strFixed = trim(deburr(str));

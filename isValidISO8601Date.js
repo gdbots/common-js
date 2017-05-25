@@ -15,7 +15,7 @@ const crazyInsaneRegexThatSomehowDetectsIso8601 = /^([\+-]?\d{4}(?!\d{2}\b))((-?
  *
  * @param {string} string
  *
- * @return {boolean}
+ * @returns {boolean}
  */
 export default function isValidISO8601Date(string) {
   return crazyInsaneRegexThatSomehowDetectsIso8601.test(string);

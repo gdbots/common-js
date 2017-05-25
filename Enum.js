@@ -50,7 +50,7 @@ export default class Enum {
    *
    * @param {string|number} value - The value of the enum name/key.
    *
-   * @return {Enum}
+   * @returns {Enum}
    */
   static create(value) {
     const instance = this.getKeys().filter(key => `${this.instances[key].getValue()}` === `${value}`);
@@ -67,7 +67,7 @@ export default class Enum {
    * @example
    * console.log(MyEnum.getEnumId());
    *
-   * @return {?string}
+   * @returns {?string}
    */
   static getEnumId() {
     return this.enumId;
@@ -80,7 +80,7 @@ export default class Enum {
    * const enumInstance = MyEnum.create(MyEnum.ENUM1);
    * console.log(enumInstance.getEnumId());
    *
-   * @return {?string}
+   * @returns {?string}
    */
   getEnumId() {
     return this.constructor.getEnumId();
@@ -111,7 +111,7 @@ export default class Enum {
   /**
    * Returns the value of the enum.
    *
-   * @return {string}
+   * @returns {string}
    */
   toString() {
     return `${this.value}`;
@@ -120,7 +120,7 @@ export default class Enum {
   /**
    * Returns the value of the enum.
    *
-   * @return {string|number}
+   * @returns {string|number}
    */
   toJSON() {
     return this.value;
@@ -129,7 +129,7 @@ export default class Enum {
   /**
    * Returns the value of the enum.
    *
-   * @return {string|number}
+   * @returns {string|number}
    */
   valueOf() {
     return this.value;
@@ -138,7 +138,7 @@ export default class Enum {
   /**
    * Returns the name of the enum.
    *
-   * @return {string}
+   * @returns {string}
    */
   getName() {
     return this.name;
@@ -147,7 +147,7 @@ export default class Enum {
   /**
    * Returns the value of the enum.
    *
-   * @return {string|number}
+   * @returns {string|number}
    */
   getValue() {
     return this.value;

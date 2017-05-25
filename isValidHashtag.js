@@ -12,7 +12,7 @@ import trimStart from 'lodash-es/trimStart';
  *
  * @param {string} hashtag
  *
- * @return {boolean}
+ * @returns {boolean}
  */
 export default function isValidHashtag(hashtag) {
   const trimmed = trimStart(hashtag, '#');
