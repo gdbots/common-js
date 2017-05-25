@@ -12,7 +12,7 @@ import isValidIpv6 from './isValidIpv6';
  * - scheme://username:password@subdomain.domain.tld:port/path/file-name.suffix?query-string#hash
  */
 function genericUrlRegex() {
-  const protocol = '(?:((?:https?|ftp)://)|mailto:)'; // (?:([A-Za-z]{3,9}://)|mailto:)
+  const protocol = '(?:(?:https?|ftp)://)'; // (?:([A-Za-z]{3,9}://)|mailto:)
   const auth = '(?:\\S+(?::\\S*)?@)?';
   const ipv4 = '(?:\\[?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\]?';
   const host = '(?:(?:[a-zA-Z0-9]-*)*[a-zA-Z0-9]+)';

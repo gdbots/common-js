@@ -73,6 +73,7 @@ test('isValidUri tests', (assert) => {
     'foo',
     'mailto:user@[255:192:168:1]',
     'mailto:user@[192.168.1.1 ]',
+    'mailto:email@[123.123.123.123',
   ];
 
   invalid.forEach(uri => assert.false(isValidUri(uri), `uri [${uri}] should NOT be valid.`));

@@ -18,7 +18,7 @@ const GENERIC_URI_PATTERN = /^(?:[a-z0-9][a-z0-9-]{1,31}:(?:[a-z0-9()+,-.:=@;$_!
  * - https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
  */
 function UrlStyleUriRegex() {
-  const protocol = '(?:([A-Za-z]{3,9}://)|mailto:)';
+  const protocol = '(?:[A-Za-z]{3,9}://)';
   const auth = '(?:\\S+(?::\\S*)?@)?';
   const ipv4 = '(?:\\[?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\]?';
   const host = '(?:(?:[a-zA-Z0-9]-*)*[a-zA-Z0-9]+)';

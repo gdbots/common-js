@@ -31,6 +31,7 @@ test('isValidEmail tests', (assert) => {
     'email@123.123.123.123',
     'foo@[bar].com',
     'email@[123.123.123.300]',
+    'email@[123.123.123.123',
     'user@[192:168:1:1]',
     'user@[2001:DB8:1]',
     'email@domain..com',
