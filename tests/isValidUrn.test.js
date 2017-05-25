@@ -26,6 +26,8 @@ test('isValidUrn tests', (assert) => {
     'foo:bar:not:start:with:urn',
     'urn:www.example.org:domain:not:valid',
     ' urn:www-example-org:validator:1',
+    'urn:www-example-org:validator:1 ',
+    'urn:urn:example-org:validator:1 ',
   ];
 
   invalid.forEach(urn => assert.false(isValidUrn(urn), `urn [${urn}] should NOT be valid.`));

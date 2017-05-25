@@ -3,30 +3,31 @@ import isValidUri from '../src/isValidUri';
 
 test('isValidUri tests', (assert) => {
   const valid = [
-    'http://localhost',
     'lol:P',
-    'urn:www-example-org:validator:1',
-    'ftp://cnn.example.com&story=breaking_news@10.0.0.1/top_story.htm',
-    'ftp://ftp.is.co.za/rfc/rfc1808.txt',
-    'http://www.ietf.org/rfc/rfc2396.txt',
     'ldap://[2001:db8::7]/c=GB?objectClass?one',
-    'mailto:John.Doe@example.com',
     'news:comp.infosystems.www.servers.unix',
     'tel:+1-816-555-1212',
     'telnet://192.0.2.16:80/',
+    'tmz:iam:command:create-user',
     'urn:isbn:0451450523',
     'urn:oid:2.16.840',
+    'urn:www-example-org:validator:1',
     'urn:isan:0000-0000-9E59-0000-O-0000-0000-2',
     'urn:oasis:names:specification:docbook:dtd:xml:4.1.2',
-    'http://localhost/test/somefile.php?query=someval&variable=value#fragment',
-    'http://[2001:db8:a0b:12f0::1]/test',
+    'ftp://ftp.is.co.za/rfc/rfc1808.txt',
+    'ftp://cnn.example.com&story=breaking_news@10.0.0.1/top_story.htm',
     'ftp://username:password@domain.com/path/to/file/somefile.html?queryVariable=value#fragment',
+    'http://localhost',
+    'http://localhost/test/somefile.php?query=someval&variable=value#fragment',
+    'http://www.ietf.org/rfc/rfc2396.txt',
     'https://subdomain.domain.com/path/to/file.php?query=value#fragment',
-    'https://subdomain.example.com/path/to/file.php?query=value#fragment',
+    'http://[2001:db8:a0b:12f0::1]/test',
+    'http://127.0.0.1/test',
+    'mailto:John.Doe@example.com',
     'mailto:john.smith(comment)@example.com',
+    'mailto:user@[127.0.0.1]',
     'mailto:user@[2001:DB8::1]',
     'mailto:M.Handley@cs.ucl.ac.uk',
-    'http://localhost:4433/path/to/file?query#fragment',
   ];
 
   valid.forEach(uri => assert.true(isValidUri(uri), `uri [${uri}] should be valid.`));
@@ -71,6 +72,7 @@ test('isValidUri tests', (assert) => {
     'http://☺.damowmow.com/',
     'foo',
     'mailto:user@[255:192:168:1]',
+    'mailto:user@[192.168.1.1 ]',
   ];
 
   invalid.forEach(uri => assert.false(isValidUri(uri), `uri [${uri}] should NOT be valid.`));

@@ -5,6 +5,7 @@ test('isValidSlug tests', (assert) => {
   const valid = [
     { slug: 't' },
     { slug: 'test' },
+    { slug: '1' },
     { slug: '1-2' },
     { slug: 'homer-simpson' },
     { slug: 'homer-simpson', allowSlashes: false },
@@ -29,6 +30,7 @@ test('isValidSlug tests', (assert) => {
     { slug: 'Homer-simpson' },
     { slug: 'homer*simpson' },
     { slug: 'homer_simpson' },
+    { slug: 'homer@simpson' },
     { slug: 'homer simpson', allowSlashes: false },
     { slug: 'homer-simpson/', allowSlashes: true },
     { slug: '2017/05/16/homer-simpson', allowSlashes: false },

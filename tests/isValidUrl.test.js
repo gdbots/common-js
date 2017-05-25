@@ -23,6 +23,7 @@ test('isValidUrl tests', (assert) => {
     'http://www.example.ninja',
     'http://www.example.com/page?q=test&qq=tteesstt#hashtags',
     'ftp://foo.bar/baz',
+    'ftp://username:password@host.com/',
     'http://foo.bar/?q=Test%20URL-en_coded%20stuff;',
     'http://foo.bar?q=Spaces+has+been+encoded',
     'http://10.1.1.254',
