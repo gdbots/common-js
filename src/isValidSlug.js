@@ -1,5 +1,5 @@
-import trim from 'lodash/trim';
 import startsWith from 'lodash/startsWith';
+import trim from 'lodash/trim';
 
 const VALID_SLUG_PATTERN = /^([a-z0-9]-?)*[a-z0-9]$/;
 const VALID_DATED_SLUG_PATTERN = /^([a-z0-9-]|[a-z0-9-][a-z0-9-/]*[a-z0-9-])$/;

@@ -23,14 +23,13 @@ test('isValidUrl tests', (assert) => {
     'http://www.example.ninja',
     'http://www.example.com/page?q=test&qq=tteesstt#hashtags',
     'ftp://foo.bar/baz',
-    'sftp://foo.bar/',
     'http://foo.bar/?q=Test%20URL-en_coded%20stuff;',
     'http://foo.bar?q=Spaces+has+been+encoded',
     'http://10.1.1.254',
     'http://localhost',
+    'http://[::1]',
     'mailto:info@example.com',
     'mailto:user@[255.192.168.1]',
-    'htt://shouldpass.com',
     'http://[2001:db8:a0b:12f0::1]/test',
   ];
 
@@ -58,10 +57,11 @@ test('isValidUrl tests', (assert) => {
     'foo.com',
     'rdar://1234',
     'h://test',
+    'sftp://foo.bar/',
     'http:shouldfail.com',
     'http:/shouldfail.com',
     'http:// shouldfail.com',
-    ' http://www.shouldfail.com',
+    ' http://www.withleadingspaces.com',
     ':// should fail',
     'http://foo.bar/foo(bar)baz quux',
     'http://-error-.invalid/',
@@ -78,10 +78,13 @@ test('isValidUrl tests', (assert) => {
     'http://⌘.ws',
     'http://foo.com/unicode_(✪)_in_parens',
     'http://☺.damowmow.com/',
+    'htt://shouldfailed.com',
+    'scheme://shouldfailed.com',
     'emailto:info@example.com',
     'urn:isbn:0451450523',
     'mailto:user@[255:192:168:1]',
     'mailto:user@[info@example.com]',
+    ' mailto:leadingspaces@[255.192.168.1]',
   ];
 
   invalid.forEach(url => assert.false(isValidUrl(url), `url [${url}] should NOT be valid.`));

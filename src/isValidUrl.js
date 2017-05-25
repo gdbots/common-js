@@ -4,12 +4,15 @@ import isValidEmail from './isValidEmail';
 import isValidIpv6 from './isValidIpv6';
 
 /**
- * inspired by gist https://gist.github.com/dperini/729294
- * and http://blog.mattheworiordan.com/post/13174566389/url-regular-expression-for-links-with-or-without
- * no unicode allowed
+ * inspired by gist @link https://gist.github.com/dperini/729294
+ * and @link http://blog.mattheworiordan.com/post/13174566389/url-regular-expression-for-links-with-or-without
+ * - no unicode allowed
+ * - allow mailto protocol
+ * - what is a url?
+ * - scheme://username:password@subdomain.domain.tld:port/path/file-name.suffix?query-string#hash
  */
 function genericUrlRegex() {
-  const protocol = '(?:([A-Za-z]{3,9}://)|mailto:)'; // (?:((?:https?|s?ftp|telnet)://)|mailto:)
+  const protocol = '(?:((?:https?|ftp)://)|mailto:)'; // (?:([A-Za-z]{3,9}://)|mailto:)
   const auth = '(?:\\S+(?::\\S*)?@)?';
   const ipv4 = '(?:\\[?([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\]?';
   const host = '(?:(?:[a-zA-Z0-9]-*)*[a-zA-Z0-9]+)';
@@ -33,6 +36,13 @@ export default function isValidUrl(url) {
     return false;
   }
 
+  // generic url
+  // only allow 'http', 'https' and 'ftp' for now
+  if (genericUrlRegex().test(url)) {
+    return true;
+  }
+
+  // email url
   if (startsWith(url, 'mailto:')) {
     const email = trimStart(url, 'mailto:');
     if (isValidEmail(email)) {
@@ -40,12 +50,10 @@ export default function isValidUrl(url) {
     }
   }
 
-  const testIpv6 = url.match(/[\w]:\/\/\[(.+)\]/i);
+  // cover coner cases for ipv6 in url
+  // ipv4 has already included in generic regex
+  const testIpv6 = url.match(/(?:https?|ftp):\/\/\[(.+)\](\S*)/i);
   if (testIpv6 && isValidIpv6(testIpv6[1])) {
-    return true;
-  }
-
-  if (genericUrlRegex().test(url)) {
     return true;
   }
 

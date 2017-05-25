@@ -1,5 +1,5 @@
-import kebabCase from 'lodash/kebabCase';
 import deburr from 'lodash/deburr';
+import kebabCase from 'lodash/kebabCase';
 import trim from 'lodash/trim';
 import isValidSlug from './isValidSlug';
 
