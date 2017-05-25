@@ -2,7 +2,7 @@
 ############
 /node_modules/
 /dist/
-#/*.js # uncomment once we're publishing to npm
+/*.js
 
 # Deployment/IDE Tools #
 ############
