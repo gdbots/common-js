@@ -1,6 +1,6 @@
 {
   "name": "@gdbots/common",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Common classes and utils for js projects.",
   "repository": {
     "type": "git",
