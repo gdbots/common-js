@@ -1,3 +1,4 @@
+import endsWith from 'lodash/endsWith';
 import startsWith from 'lodash/startsWith';
 import trim from 'lodash/trim';
 
@@ -18,6 +19,10 @@ export default function isValidSlug(slug, allowSlashes = false) {
   }
 
   if (startsWith(slug, '-') || startsWith(slug, '/')) {
+    return false;
+  }
+
+  if (endsWith(slug, '-') || endsWith(slug, '/')) {
     return false;
   }
 

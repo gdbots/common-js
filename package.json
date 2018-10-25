@@ -1,6 +1,6 @@
 {
   "name": "@gdbots/common",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Common classes and utils for js projects.",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
     "clean": "rimraf dist",
     "lint": "eslint src tests",
     "prepublish": "npm run clean && npm run lint && npm run test && npm run build",
-    "test": "BABEL_ENV=cjs tape -r ./tests/babel-register.js './tests/**/*.test.js' | faucet"
+    "test": "BABEL_ENV=test tape -r ./tests/babel-register.js './tests/**/*.test.js' | faucet"
   },
   "module": "./index.js",
   "jsnext:main": "./index.js",
@@ -21,19 +21,19 @@
     "lodash-es": "^4.17.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-plugin-lodash": "^3.2.11",
-    "babel-preset-env": "^1.4.0",
-    "babel-register": "^6.24.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
-    "eslint-config-airbnb-base": "^11.1.3",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "faucet": "^0.0.1",
-    "rimraf": "^2.6.1",
-    "tape": "^4.6.3"
+    "rimraf": "^2.6.2",
+    "tape": "^4.9.1"
   }
 }
