@@ -15,7 +15,7 @@ test('isValidSlug tests', (assert) => {
     { slug: 'homer-sim-at-ps/on', allowSlashes: true },
   ];
 
-  valid.forEach(({ slug, allowSlashes = false }) => assert.true(isValidSlug(slug, allowSlashes), `slug [${slug}] should be valid.`));
+  valid.forEach(({ slug, allowSlashes = false }) => assert.equal(isValidSlug(slug, allowSlashes), true, `slug [${slug}] should be valid.`));
 
   const invalid = [
     { slug: null },
@@ -42,7 +42,7 @@ test('isValidSlug tests', (assert) => {
     { slug: '(ﾉ °益°)ﾉ 彡 ┻━┻' },
   ];
 
-  invalid.forEach(({ slug, allowSlashes = false }) => assert.false(isValidSlug(slug, allowSlashes), `slug [${slug}] should NOT be valid.`));
+  invalid.forEach(({ slug, allowSlashes = false }) => assert.equal(isValidSlug(slug, allowSlashes), false, `slug [${slug}] should NOT be valid.`));
 
   assert.end();
 });

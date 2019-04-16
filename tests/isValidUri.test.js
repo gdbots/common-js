@@ -30,7 +30,7 @@ test('isValidUri tests', (assert) => {
     'mailto:M.Handley@cs.ucl.ac.uk',
   ];
 
-  valid.forEach(uri => assert.true(isValidUri(uri), `uri [${uri}] should be valid.`));
+  valid.forEach(uri => assert.equal(isValidUri(uri), true, `uri [${uri}] should be valid.`));
 
   const invalid = [
     'http://',
@@ -76,7 +76,7 @@ test('isValidUri tests', (assert) => {
     'mailto:email@[123.123.123.123',
   ];
 
-  invalid.forEach(uri => assert.false(isValidUri(uri), `uri [${uri}] should NOT be valid.`));
+  invalid.forEach(uri => assert.equal(isValidUri(uri), false, `uri [${uri}] should NOT be valid.`));
 
   assert.end();
 });

@@ -15,7 +15,7 @@ test('isValidUrn tests', (assert) => {
     'urn:lsid:zoobank.org:pub:CDC8D258-8F57-41DC-B560-247E17D3DC8C',
   ];
 
-  valid.forEach(urn => assert.true(isValidUrn(urn), `urn [${urn}] should be valid.`));
+  valid.forEach(urn => assert.equal(isValidUrn(urn), true, `urn [${urn}] should be valid.`));
 
   const invalid = [
     null,
@@ -30,7 +30,7 @@ test('isValidUrn tests', (assert) => {
     'urn:urn:example-org:validator:1 ',
   ];
 
-  invalid.forEach(urn => assert.false(isValidUrn(urn), `urn [${urn}] should NOT be valid.`));
+  invalid.forEach(urn => assert.equal(isValidUrn(urn), false, `urn [${urn}] should NOT be valid.`));
 
   assert.end();
 });

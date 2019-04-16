@@ -51,5 +51,5 @@ export default function isValidUrl(url) {
   // cover corner cases for ipv6 in url
   // ipv4 has already included in generic regex
   const testIpv6 = url.match(/(?:https?|ftp):\/\/\[(.+)\](\S*)/i);
-  return testIpv6 && isValidIpv6(testIpv6[1]);
+  return !!testIpv6 && isValidIpv6(testIpv6[1]);
 }

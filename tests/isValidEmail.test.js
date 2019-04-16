@@ -15,7 +15,7 @@ test('isValidEmail tests', (assert) => {
     '123@123.net',
   ];
 
-  valid.forEach(email => assert.true(isValidEmail(email), `email [${email}] should be valid.`));
+  valid.forEach(email => assert.equal(isValidEmail(email), true, `email [${email}] should be valid.`));
 
   const invalid = [
     null,
@@ -38,7 +38,7 @@ test('isValidEmail tests', (assert) => {
     'foo.bar.baz',
   ];
 
-  invalid.forEach(email => assert.false(isValidEmail(email), `email [${email}] should NOT be valid.`));
+  invalid.forEach(email => assert.equal(isValidEmail(email), false, `email [${email}] should NOT be valid.`));
 
   assert.end();
 });

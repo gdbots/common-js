@@ -53,5 +53,5 @@ export default function isValidUri(uri) {
 
   // ipv6 in uri
   const testIpv6 = uri.match(/(\w+):\/\/\[(.+)\](\S*)/i);
-  return testIpv6 && testIpv6[1] && isValidIpv6(testIpv6[2]);
+  return !!testIpv6 && !!testIpv6[1] && isValidIpv6(testIpv6[2]);
 }

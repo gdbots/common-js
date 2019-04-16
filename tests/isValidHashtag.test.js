@@ -17,7 +17,7 @@ test('isValidHashtag tests', (assert) => {
     'A'.repeat(139),
   ];
 
-  valid.forEach(hashtag => assert.true(isValidHashtag(hashtag), `hashtag [${hashtag}] should be valid.`));
+  valid.forEach(hashtag => assert.equal(isValidHashtag(hashtag), true, `hashtag [${hashtag}] should be valid.`));
 
   const invalid = [
     '#Homer Simpson Is Cool',
@@ -42,7 +42,7 @@ test('isValidHashtag tests', (assert) => {
     '_1_2_3_4',
   ];
 
-  invalid.forEach(hashtag => assert.false(isValidHashtag(hashtag), `hashtag [${hashtag}] should NOT be valid.`));
+  invalid.forEach(hashtag => assert.equal(isValidHashtag(hashtag), false, `hashtag [${hashtag}] should NOT be valid.`));
 
   assert.end();
 });
