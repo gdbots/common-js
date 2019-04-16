@@ -1,6 +1,6 @@
 {
   "name": "@gdbots/common",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Common classes and utils for js projects.",
   "repository": {
     "type": "git",
@@ -29,11 +29,11 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-config-airbnb-base": "^11.3.2",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "faucet": "^0.0.1",
-    "rimraf": "^2.6.2",
-    "tape": "^4.9.1"
+    "rimraf": "^2.6.3",
+    "tape": "^4.10.1"
   }
 }
