@@ -45,7 +45,7 @@ test('isValidISO8601Date tests', (assert) => {
     '2009-05-19 1439,55',
   ];
 
-  valid.forEach(date => assert.true(isValidISO8601Date(date), `${date} should be valid.`));
+  valid.forEach(date => assert.equal(isValidISO8601Date(date), true, `${date} should be valid.`));
 
   const invalid = [
     '200905',
@@ -73,7 +73,7 @@ test('isValidISO8601Date tests', (assert) => {
     '2010-02-18T16,25:23:48,444',
   ];
 
-  invalid.forEach(date => assert.false(isValidISO8601Date(date), `${date} should NOT be valid.`));
+  invalid.forEach(date => assert.equal(isValidISO8601Date(date), false, `${date} should NOT be valid.`));
 
   assert.end();
 });

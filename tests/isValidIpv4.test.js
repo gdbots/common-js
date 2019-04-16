@@ -8,7 +8,7 @@ test('isValidIpv4 tests', (assert) => {
     '0.0.0.0',
   ];
 
-  valid.forEach(ip => assert.true(isValidIpv4(ip), `ip; [${ip}] should be valid ipv4.`));
+  valid.forEach(ip => assert.equal(isValidIpv4(ip), true, `ip; [${ip}] should be valid ipv4.`));
 
   const invalid = [
     null,
@@ -24,7 +24,7 @@ test('isValidIpv4 tests', (assert) => {
     '192.168.1.256',
   ];
 
-  invalid.forEach(ip => assert.false(isValidIpv4(ip), `ip [${ip}] should NOT be valid ipv4.`));
+  invalid.forEach(ip => assert.equal(isValidIpv4(ip), false, `ip [${ip}] should NOT be valid ipv4.`));
 
   assert.end();
 });

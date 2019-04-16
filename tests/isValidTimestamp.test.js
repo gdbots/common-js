@@ -10,7 +10,7 @@ test('isValidTimestamp (allowNegative=false) tests', (assert) => {
     Number.MAX_SAFE_INTEGER,
   ];
 
-  valid.forEach(ts => assert.true(isValidTimestamp(ts), `ts [${ts}] should be valid.`));
+  valid.forEach(ts => assert.equal(isValidTimestamp(ts), true, `ts [${ts}] should be valid.`));
 
   const invalid = [
     'a',
@@ -20,7 +20,7 @@ test('isValidTimestamp (allowNegative=false) tests', (assert) => {
     -1,
   ];
 
-  invalid.forEach(ts => assert.false(isValidTimestamp(ts), `ts [${ts}] should NOT be valid.`));
+  invalid.forEach(ts => assert.equal(isValidTimestamp(ts), false, `ts [${ts}] should NOT be valid.`));
 
   assert.end();
 });
@@ -38,7 +38,7 @@ test('isValidTimestamp (allowNegative=true) tests', (assert) => {
     -12219292800,
   ];
 
-  valid.forEach(ts => assert.true(isValidTimestamp(ts, true), `ts [${ts}] should be valid.`));
+  valid.forEach(ts => assert.equal(isValidTimestamp(ts, true), true, `ts [${ts}] should be valid.`));
 
   const invalid = [
     'a',
@@ -51,7 +51,7 @@ test('isValidTimestamp (allowNegative=true) tests', (assert) => {
     -12219292801,
   ];
 
-  invalid.forEach(ts => assert.false(isValidTimestamp(ts, true), `ts [${ts}] should NOT be valid.`));
+  invalid.forEach(ts => assert.equal(isValidTimestamp(ts, true), false, `ts [${ts}] should NOT be valid.`));
 
   assert.end();
 });
