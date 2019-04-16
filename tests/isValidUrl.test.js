@@ -34,7 +34,7 @@ test('isValidUrl tests', (assert) => {
     'http://[2001:db8:a0b:12f0::1]/test',
   ];
 
-  valid.forEach(url => assert.true(isValidUrl(url), `url [${url}] should be valid.`));
+  valid.forEach(url => assert.same(isValidUrl(url), true, `url [${url}] should be valid.`));
 
   const invalid = [
     null,
@@ -89,7 +89,7 @@ test('isValidUrl tests', (assert) => {
     'mailto:user@[255.192.168.1',
   ];
 
-  invalid.forEach(url => assert.false(isValidUrl(url), `url [${url}] should NOT be valid.`));
+  invalid.forEach(url => assert.same(isValidUrl(url), false, `url [${url}] should NOT be valid.`));
 
   assert.end();
 });
