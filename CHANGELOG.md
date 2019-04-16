@@ -2,7 +2,7 @@
 
 
 ## v0.1.2
-* Update isValidUrl to always return a boolean value.
+* Update isValidUrl and isValidUri to always return a boolean value.
 
 
 ## v0.1.1
