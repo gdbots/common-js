@@ -1,6 +1,10 @@
 # CHANGELOG
 
 
+## v1.0.0
+* Tag first stable version.
+
+
 ## v0.1.2
 * Update isValidUrl and isValidUri to always return a boolean value.
 
