@@ -8,6 +8,8 @@ test('createSlug tests', (assert) => {
     { input: '- - - -', output: null },
     { input: 'ಠ_ಠ', output: null },
     { input: '///////', output: null, allowSlashes: true },
+    { input: '2019/04/24', output: '2019/04/24', allowSlashes: true },
+    { input: '2019/04/24/', output: '2019/04/24', allowSlashes: true },
     { input: ' / Too-Many // Slashes /// what / ', output: 'too-many/slashes/what', allowSlashes: true },
     { input: ' still-/-/too_many/-slashes-/-/test-/-', output: 'still/too-many/slashes/test', allowSlashes: true },
     { input: '(╯°□°)╯︵ ┻━┻', output: null, allowSlashes: true },

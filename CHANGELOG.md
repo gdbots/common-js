@@ -1,6 +1,10 @@
 # CHANGELOG
 
 
+## v1.0.1
+* Fix createSlug bug that was turning `2019/04/02` into `2019/-04/-2`.
+
+
 ## v1.0.0
 * Tag first stable version.
 
