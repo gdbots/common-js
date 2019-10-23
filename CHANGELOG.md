@@ -1,6 +1,10 @@
 # CHANGELOG
 
 
+## v1.0.2
+* Remove createSlug functionality that surrounded digits with dashes (`-`).
+
+
 ## v1.0.1
 * Fix createSlug bug that was turning `2019/04/02` into `2019/-04/-2`.
 

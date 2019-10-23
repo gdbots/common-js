@@ -6,7 +6,7 @@ test('createSlugFromCamel tests', (assert) => {
     { input: 'HomerSimpson', output: 'homer-simpson' },
     { input: 'SIMPSON', output: 's-i-m-p-s-o-n' },
     { input: 'homerSimpson', output: 'homer-simpson' },
-    { input: 'HomerSim123pson', output: 'homer-sim-123-pson' },
+    { input: 'HomerSim123pson', output: 'homer-sim123pson' },
     { input: '1HomerSimpson', output: '1-homer-simpson' },
     { input: 'Mc_Hammer', output: 'mc-hammer' },
   ];

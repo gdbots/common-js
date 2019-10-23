@@ -1,5 +1,4 @@
 import deburr from 'lodash/deburr';
-import kebabCase from 'lodash/kebabCase';
 import trim from 'lodash/trim';
 import isValidSlug from './isValidSlug';
 
@@ -15,6 +14,15 @@ const convertables = [
   { s: '%', r: ' Percent ' },
   { s: '@', r: ' At ' },
 ];
+
+// does not surround digits with dashes like lodash does
+function kebabCase(str) {
+  return str
+    .replace(/[\/-\s_]+/g, '-')
+    .replace(/([a-z][A-Z])/, (m, p1) => `${p1[0]}-${p1[1].toLowerCase()}`)
+    .replace(/(^-+)|(-+$)/g, '')
+    .toLowerCase();
+}
 
 /**
  * Creates a slug cased string (aka kebab case) from the provided string if possible.
@@ -45,7 +53,6 @@ export default function createSlug(str, allowSlashes = false) {
   }
 
   result = trim(strFixed.replace(/[^a-zA-Z0-9\-/]+/g, '-')
-    .replace(/(\d+(?!(\/|\d|$)))/g, '-$1-')
     .replace(/-+/g, '-')
     .replace(/(\/-)|(-\/)/g, '/')
     .replace(/\/+/g, '/')
