@@ -52,11 +52,12 @@ export default function createSlug(str, allowSlashes = false) {
     return isValidSlug(result, false) ? result : null;
   }
 
-  result = trim(strFixed.replace(/[^a-zA-Z0-9\-/]+/g, '-')
+  result = strFixed.replace(/[^a-zA-Z0-9\-/]+/g, '-')
     .replace(/-+/g, '-')
     .replace(/(\/-)|(-\/)/g, '/')
     .replace(/\/+/g, '/')
-    .toLowerCase(), /[-/]/g);
+    .replace(/^[-/]+|[-/]+$/g, '')
+    .toLowerCase();
 
   return isValidSlug(result, true) ? result : null;
 }

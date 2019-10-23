@@ -16,6 +16,7 @@ test('createSlug tests', (assert) => {
     { input: 3.14, output: '3-14' },
     { input: false, output: 'false' },
     { input: true, output: 'true' },
+    { input: '2012/20/12/thing', output: '2012/20/12/thing', allowSlashes: true },
     { input: 'Beyoncé Knowles', output: 'beyonce-knowles' },
     { input: 'Beyoncé Knowles', output: 'beyonce-knowles', allowSlashes: true },
     { input: 'Homer simpson', output: 'homer-simpson' },
